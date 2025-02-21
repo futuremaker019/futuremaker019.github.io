@@ -11,6 +11,8 @@ navbar_entries:
 blog_entries:
   - title: Home
     url: Home
+  - title: Java
+    url: Java
   - title: Spring
     url: Spring
   - title: Javascript
