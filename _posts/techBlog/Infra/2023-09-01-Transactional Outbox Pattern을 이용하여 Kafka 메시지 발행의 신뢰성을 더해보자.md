@@ -8,10 +8,10 @@ tags: [Kafka, Infra, blog]
 
 ### Transactional Outbox pattern 이란
 
-- Outbox는 `보낸 편지함`  을 뜻하며, 발생된 message 를 Message 브로커로 발행되었는지를 확인하여 신뢰성을 보장해주는 패턴이다.
+- Outbox는 `보낸 편지함`  을 뜻하며, 발생된 message 를 `Message Broker`로 발행되었는지를 확인하여 신뢰성을 보장해주는 패턴이다.
 - 이러한 패턴은 왜 필요한가
-    - 트랜잭션이 커밋된 이 후 카프카 등의 Message 브로커에서 메시지 발행이 되지 않았다면 반드시 처리되야 하는 메시지는 소실 될 것이다.
-    - 또한 DB 트랜잭션은 데이터 베이스 차원의 원자성을 보장하지만 비동기로 이루어지는 Event Driven Architecture로 구성된 시스템에서는 메시지 발행의 유무는 Cusumer를 통해 메시지를 직접 확인하지 않는다면 메시지 유실 유무를 확인할 수 없다.
+    - 트랜잭션이 커밋된 이 후 카프카 등의 `Message Broker`에서 메시지 발행이 되지 않았다면 반드시 처리되야 하는 메시지는 소실 될 것이다.
+    - 또한 DB 트랜잭션은 데이터 베이스 차원의 원자성을 보장하지만 비동기로 이루어지는 `Event Driven Architecture` 시스템에서는 메시지 발행의 유무는 `Consumer`를 통해 메시지를 직접 확인하지 않는다면 메시지 유실 유무를 확인할 수 없다.
 - 위와 같은 이유로 도메인 로직의 성공 시, 발행되는 메시지를 `outbox table` 이라는 별도의 테이블에 저장하여 함께 커밋한다. 미발행된 메시지를 outbox table에서 확인하여 배치 시스템등으로 재발행을 유도한다.
 
 ### 프로젝트 아키텍처
@@ -24,28 +24,28 @@ tags: [Kafka, Infra, blog]
 ├── domain/
 │   ├── common/
 │   │   ├── dataplatform/
-│   │   │   └── DataPlatformClient (interface)
+│   │   │   └── DataPlatformClient          (interface)
 │   │   ├── notification/
 │   │   │   ├── Notification
-│   │   │   └── NotificationSender (interface)
+│   │   │   └── NotificationSender          (interface)
 │   │   └── outbox/
 │   │       ├── Outbox
-│   │       ├── OutboxMessageWriter (interface)
-│   │       └── OutboxRepository    (interface)
+│   │       ├── OutboxMessageWriter         (interface)
+│   │       └── OutboxRepository            (interface)
 │   └── payment/
 │       ├── event/
 │       │   ├── PaymentEvent
-│       │   └── PaymentEventPublisher (interface)
+│       │   └── PaymentEventPublisher       (interface)
 │       └── message/
 │           ├── PaymentMessage
-│           └── PaymentMessageSender (interface)
+│           └── PaymentMessageSender        (interface)
 ├── infrastructures/
 │   ├── kafka/
 │   │   ├── KafkaMessage
 │   │   ├── payment/
-│   │   │   └── PaymentKafkaMessageSender (PaymentMessageSender 구현체)
+│   │   │   └── PaymentKafkaMessageSender   (PaymentMessageSender 구현체)
 │   │   └── notification/
-│   │       └── SlackNotificationSender (NotificationSener 구현체)
+│   │       └── SlackNotificationSender     (NotificationSener 구현체)
 │   └── spring/
 │       └── payment/
 │           └── PaymentSpringEventPublisher (PaymentEventPublisher 구현체)
