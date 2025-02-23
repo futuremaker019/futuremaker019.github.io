@@ -7,3 +7,4 @@ gem "webrick", "~> 1.7"
 gem 'csv'
 gem 'base64'
 gem 'bigdecimal'
+gem 'jekyll-toc'

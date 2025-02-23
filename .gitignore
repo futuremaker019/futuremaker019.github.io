@@ -6,7 +6,6 @@ _site
 
 .DS_Store
 
-./Gemfile
-./Gemfile.lock
+Gemfile.lock
 
 .idea

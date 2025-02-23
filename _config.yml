@@ -58,6 +58,11 @@ sass:
 plugins:
   - jekyll-feed
   - jekyll-soopr-seo-tag
+  - jekyll-toc
+
+kramdown:
+  toc_levels: 2..6
+
 # collections:
 #   tags:
 #     output: true

@@ -276,3 +276,31 @@ li code {
   text-transform: lowercase;
   //border: 1px solid var(--text-secondary);
 }
+
+.post-wrapper {
+  width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sticky-sidebar {
+  position: relative;
+}
+
+.toc-container {
+  position: absolute;
+  left: 100%;
+  margin-left: 3rem;
+}
+
+.toc {
+  border-left: 1px solid var(--line-color);
+  position: fixed;
+  top: 100px;
+  padding-left: 15px;
+}
+
+.post-content {
+  flex-grow: 1;
+  max-width: 720px;
+}
