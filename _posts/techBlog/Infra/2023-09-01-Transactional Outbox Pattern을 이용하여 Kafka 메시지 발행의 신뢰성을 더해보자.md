@@ -1,6 +1,7 @@
 ---
 layout: post
 tags: [Kafka, Infra, blog]
+toc: true
 ---
 
 ## Kafka를 이용한 책임분리 및 Transactional Outbox Pattern 구현
@@ -183,7 +184,8 @@ public class OutboxMessageWriterImpl implements OutboxMessageWriter {
 ```
 - 상태값이 PUBLISHED 로 변경되지 못한 outbox table의 데이터를 유실된 메시지로 판단하여 스케줄러를 통해 일정시간의 간격으로 다시 발행하도록 한다
 
-- 결론
-    - Message Broker를 적용하여 메시지를 발행하고 소비하는 방식의 구성으로 시스템의 느슨한 결합을 유도하여, 구성의 변경 시 다른 로직에 영향을 미치지 않게 만들 수 있다.
-    - 이로 인하여 유연성 및 확장성이 증가한다.
-    - 또한 Transactional Outbox Pattern을 적용하여 메시지 발행에 대한 신뢰성 및 안정성을 유지할 수 있어 메시지 유실을 방지하여 데이터의 일관성을 유지할 수 있다.
+## 결론
+
+- Message Broker를 적용하여 메시지를 발행하고 소비하는 방식의 구성으로 시스템의 느슨한 결합을 유도하여, 구성의 변경 시 다른 로직에 영향을 미치지 않게 만들 수 있다.
+- 이로 인하여 유연성 및 확장성이 증가한다.
+- 또한 Transactional Outbox Pattern을 적용하여 메시지 발행에 대한 신뢰성 및 안정성을 유지할 수 있어 메시지 유실을 방지하여 데이터의 일관성을 유지할 수 있다.

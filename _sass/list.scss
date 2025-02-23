@@ -59,7 +59,21 @@ ul.horizontal-list {
     }
   }
 
+}
+
+
+/* Responsive cards - one column layout on small screens */
+@media screen and (max-width: 1300px) {
   .sticky-sidebar {
     display: none;
   }
 }
+
+// /* Responsive cards - one column layout on small screens */
+// @media screen and (max-width: 720px) {
+//   .post-content {
+//     margin: 0 40px;
+//   }
+// }
+
+

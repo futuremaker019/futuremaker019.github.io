@@ -1,6 +1,7 @@
 ---
 layout: post
 tags: [Isolation Level, Database, blog]
+toc: true
 ---
 
 

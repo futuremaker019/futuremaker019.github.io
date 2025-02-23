@@ -1,6 +1,7 @@
 ---
 layout: post
 tags: [Transaction, ACID, Database, blog]
+toc: true 
 ---
 
 ### Transaction 이란
