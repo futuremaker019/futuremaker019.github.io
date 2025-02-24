@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      Git 명령어 정리
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.7.3 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Git 명령어 정리" />
+<meta name="author" content="Abhinav Saxena" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="git 명령어" />
+<meta property="og:description" content="git 명령어" />
+<link rel="canonical" href="http://localhost:4000/git-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%A0%95%EB%A6%AC" />
+<meta property="og:url" content="http://localhost:4000/git-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%A0%95%EB%A6%AC" />
+<meta property="og:site_name" content="futuremaker’s blog" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/git-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%A0%95%EB%A6%AC" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-20T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/git-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%A0%95%EB%A6%AC" />
+<meta property="twitter:title" content="Git 명령어 정리" />
+<meta name="twitter:site" content="@abhinav" />
+<meta name="twitter:creator" content="@Abhinav Saxena" />
+<script type="application/ld+json">
+{"headline":"Git 명령어 정리","url":"http://localhost:4000/git-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%A0%95%EB%A6%AC","datePublished":"2023-12-20T00:00:00+09:00","dateModified":"2023-12-20T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/git-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%A0%95%EB%A6%AC"},"author":{"@type":"Person","name":"Abhinav Saxena"},"@type":"BlogPosting","description":"git 명령어","@context":"https://schema.org"}</script>
+<script async defer data-soopr-token="pt_86c48a585d77ba8441f155e3e016788c" src="https://sdk.soopr.co/soopr.js"  ></script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="futuremaker&apos;s blog" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="post-wrapper" aria-label="Content">
+        
+        <div class="post-content">
+
+            <!-- content here -->
+            
+  <a href="/blog">blog</a>
+
+
+<h1 class="post-title">Git 명령어 정리</h1>
+
+<aside class="sticky-sidebar">
+  <div class="toc-container">
+    
+    <div class="toc">
+
+        <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#git-명령어">git 명령어</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#브랜치">브랜치</a></li>
+<li class="toc-entry toc-h3"><a href="#add">Add</a></li>
+<li class="toc-entry toc-h3"><a href="#clone">Clone</a></li>
+<li class="toc-entry toc-h3"><a href="#commit">Commit</a></li>
+<li class="toc-entry toc-h3"><a href="#gitignore">gitignore</a></li>
+<li class="toc-entry toc-h3"><a href="#reset">Reset</a></li>
+<li class="toc-entry toc-h3"><a href="#config">Config</a></li>
+<li class="toc-entry toc-h3"><a href="#stash">Stash</a></li>
+<li class="toc-entry toc-h3"><a href="#submodule">Submodule</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#서브모듈-구성">서브모듈 구성</a></li>
+<li class="toc-entry toc-h4"><a href="#서브모듈-포함한-프로젝트-클론">서브모듈 포함한 프로젝트 클론</a></li>
+<li class="toc-entry toc-h4"><a href="#submodule이-포함된-프로젝트-클론-명령어">submodule이 포함된 프로젝트 클론 명령어</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#subtree">Subtree</a></li>
+<li class="toc-entry toc-h3"><a href="#github-and-remote-repository">GitHub and Remote Repository</a></li>
+<li class="toc-entry toc-h3"><a href="#에러-모음">에러 모음</a></li>
+<li class="toc-entry toc-h3"><a href="#upsteam">Upsteam</a></li>
+</ul>
+</li>
+</ul>
+    
+    </div>
+</div>
+</aside>
+
+
+<p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">December 2023</span>
+  
+
+
+  
+  
+  (1614 Words, 
+  9 Minutes)
+  
+
+</p>
+
+<div class='soopr-btn'></div>
+
+
+
+  <div class="">
+    
+    <span class="tag">Git</span>
+    
+    <span class="tag">ETC</span>
+    
+    <span class="tag">blog</span>
+    
+  </div>
+
+
+
+
+
+<h2 id="git-명령어">git 명령어</h2>
+
+<h3 id="브랜치">브랜치</h3>
+
+<hr />
+
+<ul>
+  <li>브랜치 생성</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch branch명 <span class="p">[&lt;</span>from branch<span class="p">&gt;]</span>
+<span class="k">ex</span><span class="p">)</span> git branch ex1 <span class="p">[</span>master<span class="p">]</span> <span class="p">(</span>어느 브랜치를 기준으로 브랜치가 생성이 되었는지 나타낸다<span class="p">.</span> 생략가능<span class="p">)</span>
+</code></pre></div></div>
+
+<p>브랜치 생성 및 checkout 동시에 실행</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="p">-</span><span class="k">b</span> 생성할 branch명
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>브랜치 확인</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
+</code></pre></div></div>
+
+<p>명령어 사용하며 원격 저장소의 모든 branch의 명령어를 보여준다.</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch <span class="p">-</span><span class="k">r</span>
+</code></pre></div></div>
+
+<p>로컬, 원격 모든 저장소의 branch의 리스트를 보여준다.</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch <span class="p">-</span><span class="k">a</span>
+</code></pre></div></div>
+
+<p>이전 브랜치로 이동</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch -
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>브랜치로 이동</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="p">[</span>branch명<span class="p">]</span>
+</code></pre></div></div>
+
+<p>특정 브랜치의 파일을 원하는 브랜치로 merge 시킨다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout -p {merge할 브랜치명} {merge할 파일}
+ex) git checkout -p master Hello.java
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>브랜치 병합
+    <ul>
+      <li>병합하고자하는 브랜치를 합친다.</li>
+      <li>일반 브랜치를 master 브랜치와 병합</li>
+      <li>conflicts를 해결하고 commit을 하여 통합을 완료한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master
+git merge branch명
+
+git merge <span class="p">--</span><span class="nb">ff</span> branch명
+git merge <span class="p">--</span>no<span class="p">-</span><span class="nb">ff</span> branch명
+
+</code></pre></div></div>
+
+<p>option)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>명령어</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>–ff <br />(기본 설정)</td>
+      <td>병합 대상 브랜치가 fast-forward 관계인 경우, 병합커밋이 만들지 않고 브랜치 태깅만 변경됨</td>
+    </tr>
+    <tr>
+      <td>–no-ff</td>
+      <td>fast-forward 관계인 경우에도 반드시 병합커밋을 만든다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://koreabigname.tistory.com/65">참고 사이트</a></p>
+
+<p><br /></p>
+
+<ul>
+  <li>브랜치 삭제</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch <span class="p">-</span><span class="k">d</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>브랜치 이름 변경
+    <ul>
+      <li>로컬에서 이름 수정 (원격 저장소에 올리지 않았을 때)</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch <span class="p">-</span><span class="k">m</span> <span class="p">{</span>변경 전 branch명<span class="p">}</span> <span class="p">{</span>변경하고 싶은 branch명<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>push 전에 Master branch의 이름 변경
+    <ul>
+      <li>원격 저장소에서 master 브랜치의 이름을 다르게 지정했다면 처음 push할때 master 브랜치의 이름을 변경해주어야 한다.
+        <ul>
+          <li>이름을 변경하지 않으면 2개의 origin이 생성된다.</li>
+          <li>Repository 생성 시, 기본 브랜치의 이름을 설정해주는 항목이 추가되었다. 고려하자.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch -M main
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>
+    <ul>
+      <li>원격 저장소에 올렸을 때 (<a href="https://thdev.tech/git/2016/12/19/Git-Branch-Name-Change/">참고사이트</a>)</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="p">-</span> git branch <span class="p">-</span><span class="k">m</span> <span class="p">{</span>old branch명<span class="p">}</span> <span class="p">{</span><span class="k">new</span> branch명<span class="p">}</span>
+ <span class="p">-</span> git push origin <span class="p">:{</span>old branch명<span class="p">}</span>   <span class="sr">//</span> 콜론을 넣는것에 유의하자
+ <span class="p">-</span> git push <span class="p">--</span><span class="k">set</span><span class="p">-</span>upstream origin <span class="p">{</span><span class="k">new</span> branch명<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>bash shell에서 브랜치 정보 확인 (<a href="https://opentutorials.org/course/2708/15261">참고사이트</a>)</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git <span class="nb">log</span> <span class="p">--</span>branches <span class="p">--</span> graph <span class="p">--</span> decorate <span class="p">--</span> oneline
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="add">Add</h3>
+
+<hr />
+
+<ul>
+  <li>Untacked 파일, 디렉토리를 stage에 올림</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .
+</code></pre></div></div>
+
+<ul>
+  <li>Unstage 상태로 변경 (파일을 선택하여 Unstage 상태로 변경한다.)</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset HEAD 파일명
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="clone">Clone</h3>
+
+<hr />
+
+<ul>
+  <li>일반적인 클론</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone github 주소
+</code></pre></div></div>
+
+<ul>
+  <li>전체 브랜치를 클론하지 않고 특정 브랜치만 클론</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="p">-</span><span class="k">b</span> <span class="p">{</span>branch_name<span class="p">}</span> <span class="p">--</span>single<span class="p">-</span>branch <span class="p">{</span>저장소 URL<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<h3 id="commit">Commit</h3>
+
+<hr />
+
+<p>에디터를 이용하여 메시지르르 입력할 때</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit
+</code></pre></div></div>
+
+<p>메시지를 입력 후 커밋</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit -m "커밋 메시지"
+</code></pre></div></div>
+
+<p>git add 와 commit을 동시에 한다.</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="p">-</span><span class="k">a</span> <span class="p">-</span><span class="k">m</span> <span class="s2">"커밋 메시지"</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>커밋 로그 변경</p>
+
+<ul>
+  <li>로컬에서 마지막으로 커밋한 로그를 변경</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="p">--</span>amend <span class="p">-</span><span class="k">m</span> <span class="s2">"변경을 원하는 로그 작성"</span>
+</code></pre></div></div>
+
+<p>commit을 취소하고 해당 파일들은 staged 상태로 워킹 디렉터리에 보존</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset --soft HEAD^
+</code></pre></div></div>
+
+<p>commit을 취소하고 해당 파일들은 unstaged 상태로 워킹 디렉터리에 보존</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset --mixed HEAD^
+git reset HEAD^
+</code></pre></div></div>
+
+<p>마지막 2개의 commit을 취소</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset HEAD~2
+</code></pre></div></div>
+
+<p>commit을 취소하고 해당 파일들은 unstaged 상태로 워킹 디렉터리에서 삭제</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset --hard HEAD^
+</code></pre></div></div>
+
+<p>마지막 merge를 취소시키는 명령어</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset --merge [merge 전의 commit hash 값]
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="gitignore">gitignore</h3>
+
+<hr />
+
+<ul>
+  <li>gitignore 파일 생성</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch <span class="p">.</span>gitignore
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<ul>
+  <li>
+    <p>ignore 해야할 목록을 추가한다. (<a href="https://www.toptal.com/developers/gitignore">gitignore 생성 사이트</a>)</p>
+
+    <ul>
+      <li>스프링 부트에서는 프로젝트 생성 시, 자동적으로 gitignore가 생성됨</li>
+    </ul>
+  </li>
+  <li>
+    <p>gitignore가 적용되지 않는다면 아래의 명령어를 사용하여 cache를 삭제해준다.</p>
+  </li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rm <span class="p">--</span>cached <span class="p">-</span><span class="k">r</span> <span class="p">.</span>
+<span class="p">-</span> 전체 파일을 stage에서 내려준다<span class="p">.</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위의 명령어를 사용해도 stage에서 내려오지 않는 파일은 직접 명시하여 내려준다.</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rm <span class="p">-</span><span class="k">r</span> <span class="p">{</span>파일명<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>특정 파일이나 폴더를 추가시키고 싶을때 사용하는 명령어
+    <ul>
+      <li>방법1 : 형상관리에 포함하고 싶은 파일의 부모 디렉토리를 모두 <code class="language-plaintext highlighter-rouge">!</code>로 제외시켜준다.</li>
+      <li>방법2 : <code class="language-plaintext highlighter-rouge">git add -f</code>를 이용하여 stage에 강제로 올린다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 파일 하나만 추가
+<span class="p">!</span>node_modules<span class="sr">/axios/</span>lib<span class="sr">/core/</span>createError<span class="p">.</span><span class="nb">js</span>
+
+# 디렉토리 추가
+<span class="p">!</span><span class="k">src</span><span class="sr">/main/</span>webapp<span class="sr">/WEN-INF/</span>lib/
+
+# 아래의 형태로 추가함
+<span class="p">!</span><span class="k">src</span><span class="sr">/main/</span>webapp<span class="sr">/WEN-INF/</span>lib/*<span class="p">.</span>jar
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="reset">Reset</h3>
+
+<hr />
+
+<p>HEAD를 포함한 이후의 모든 commit이 삭제된다.</p>
+
+<ul>
+  <li>hard를 사용 시, wording directory까지 영향을 받는다.</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset <span class="p">--</span>hard HEAD<span class="p">~</span>
+</code></pre></div></div>
+
+<p>commit 버전을 포함하지 않은 이후의 모든 commit이 삭제 된다.</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset <span class="p">--</span>hard <span class="p">[</span>commit 버전<span class="p">]</span>
+</code></pre></div></div>
+
+<p>원격 저장소에 push한 commit 이후의 commit은 모두 삭제된다.</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset <span class="p">--</span>hard origin/master
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="config">Config</h3>
+
+<hr />
+
+<p>이름과 이메일 입력</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> global config 변경
+git config <span class="p">--</span>global user<span class="p">.</span>name <span class="s2">"이름 입력"</span>
+git config <span class="p">--</span>global user<span class="p">.</span>email <span class="s2">"이메일 주소입력"</span>
+
+<span class="sr">//</span> local config 변경
+git config <span class="p">--</span>local user<span class="p">.</span>name <span class="s2">"이름 입력"</span>
+git config <span class="p">--</span>local user<span class="p">.</span>email <span class="s2">"이메일 주소입력"</span>
+</code></pre></div></div>
+
+<p>config 확인</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="p">--</span><span class="k">list</span>
+</code></pre></div></div>
+
+<p>기타 리눅스 명령어로 config 확인</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span>config에 저장된 이름과 이메일 주소 정보를 확인한다<span class="p">.</span>
+<span class="k">cat</span> <span class="p">.</span>gitconfig
+
+<span class="sr">//</span> 자장된 이름과 이메일 주소를 지운다<span class="p">.</span>
+rm <span class="p">.</span>gitconfig
+</code></pre></div></div>
+
+<p>alias 생성</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># log alias 생성
+</span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">alias</span><span class="p">.</span><span class="n">lg</span> <span class="s">'log --graph --oneline --all'</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="stash">Stash</h3>
+
+<hr />
+
+<p>변경내용 임시저장</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span> <span class="n">stash</span>
+</code></pre></div></div>
+
+<p>원하는 이름으로 stash 저장</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span> <span class="n">stash</span> <span class="n">save</span> <span class="p">[</span><span class="n">stash명</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>stash 목록 보기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span> <span class="n">stash</span> <span class="nb">list</span>
+</code></pre></div></div>
+
+<p>가장 최근 stash 가져오기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span> <span class="n">stash</span> <span class="nb">apply</span>
+</code></pre></div></div>
+
+<p>특정 stash 가져오기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span> <span class="n">stash</span> <span class="nb">apply</span> <span class="n">stash</span><span class="o">@</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>가장 최근 stash를 적용하고 동시에 stack에서 지우기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span> <span class="n">stash</span> <span class="n">pop</span>
+</code></pre></div></div>
+
+<p>특정 stash를 적용하고 동시에 stack에서 지우기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span> <span class="n">stash</span> <span class="n">pop</span> <span class="n">stash</span><span class="o">@</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>가장 최근 stash 지우기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span> <span class="n">stash</span> <span class="n">drop</span>
+</code></pre></div></div>
+
+<p>특정 stash 지우기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span> <span class="n">stash</span> <span class="n">drop</span> <span class="n">stash</span><span class="o">@</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="submodule">Submodule</h3>
+
+<hr />
+
+<h4 id="서브모듈-구성">서브모듈 구성</h4>
+
+<p>application.yml을 submodule로 적용하기 위해 작업했다. (보안을 위한 작업)</p>
+
+<p><code class="language-plaintext highlighter-rouge">sub-repo</code>를 생성하고 파일을 push한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">super-repo</code>에 <code class="language-plaintext highlighter-rouge">sub-repo</code>를 등록하기 위해 아래 명령어를 적용한다.</p>
+
+<blockquote>
+  <p>src/main/resources의 하위에 concert-api-config 디렉토리는 생성하지 말고 명령어를 입력하자</p>
+</blockquote>
+
+<pre><code class="language-vi">git submodule add [sub-repo 주소] [sub-repo가 위치할 경로]
+
+git submodule add https://github.com/futuremaker019/carenet-api-config.git src/main/resources/carenet-api-config
+</code></pre>
+
+<h4 id="서브모듈-포함한-프로젝트-클론">서브모듈 포함한 프로젝트 클론</h4>
+
+<pre><code class="language-vi">git clone --recurse-submodules [super-repo git 주소]
+</code></pre>
+
+<p>명령어를 입력하면 <code class="language-plaintext highlighter-rouge">.gitmodules</code> 가 생성되며 path, url을 확인가능하다.</p>
+
+<p>출처 : <a href="https://hudi.blog/git-submodule/">https://hudi.blog/git-submodule/</a></p>
+
+<p><br /></p>
+
+<h4 id="submodule이-포함된-프로젝트-클론-명령어">submodule이 포함된 프로젝트 클론 명령어</h4>
+
+<pre><code class="language-vi">git clone --recurse-submodules [프로젝트 git URL]
+</code></pre>
+
+<p>위 명령어에서 <code class="language-plaintext highlighter-rouge">--recursive--submodules</code>를 명시하지 않고 클론 했을때 아래 명령어를 사용하여 submodule을 최신화 해준다.
+<code class="language-plaintext highlighter-rouge">submodule</code>이 속한 프로젝트를 새로 clone 시 <code class="language-plaintext highlighter-rouge">submodule</code>도 같이 로드되도록 만들어주는 명령어</p>
+<pre><code class="language-vi">git submodule update --init --recursive
+</code></pre>
+
+<p>submodule 직접 수정 후 push 한다. push 후 submodule을 pull 한다.</p>
+
+<pre><code class="language-vi">git submodule foreach git pull [원격 리모트명]  [브랜치명]
+ex) git submodule foreach git pull origin master
+</code></pre>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>intellij에서 직접 fetch하여 submodule의 origin/master를 최신화 시킴
+그 후 명령어
+git submodule upate --remote 를 이용하여 detached 된 head를 master 브랜치로 옮김
+</code></pre></div></div>
+
+<p>spring에서 build.gradle에 명시하여 빌드시 submodule을 copy 한다. (gradle build 필요)</p>
+
+<pre><code class="language-vi">tasks.register('copySecret') {
+	copy {
+		from 'src/main/resources/stock_backend_config'
+		include "*.yml"
+		into 'src/main/resources'
+	}
+}
+</code></pre>
+
+<p>출처 : <a href="https://dkswnkk.tistory.com/578">https://dkswnkk.tistory.com/578</a></p>
+
+<p><br /></p>
+
+<h3 id="subtree">Subtree</h3>
+
+<hr />
+
+<p>상위 리포지토리에 하위 리포지토리를 두고 싶을때 사용했다. 상위 리포지토리에 명시될 이름으로 <code class="language-plaintext highlighter-rouge">prefix</code>에 작성해준다.</p>
+
+<pre><code class="language-vi">git subtree add --prefix=[상위 리포지토리에 명시될 이름] [하위리포지토리 git 주소] [하위리포지토리에서 가져올 branch 명]
+
+ex) git subtree add --prefix=spring-basic https://github.com/furuemaker019/spring-basic.git master
+</code></pre>
+
+<p><img src="/assets/images/etc/git-subtree.png" width="600" /></p>
+
+<p><br /></p>
+
+<h3 id="github-and-remote-repository">GitHub and Remote Repository</h3>
+
+<hr />
+
+<p>Remote를 만드는 문법, push를 하기 위한 준비 단계</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote <span class="nb">add</span> origin <span class="p">(</span>repository URL<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Remote repository에 push</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="p">-</span><span class="k">u</span> origin master
+
+<span class="p">-</span><span class="k">u</span> <span class="p">:</span> Remote Repositiry에 최초 master branch를 push할 때 붙여준다<span class="p">.</span>
+     upsteam을 의미한다<span class="p">.</span>
+
+<span class="p">-</span> origin <span class="p">:</span> name of remote
+<span class="p">-</span> master <span class="p">:</span> name of branch
+</code></pre></div></div>
+
+<p>강제 push</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="p">-</span><span class="k">f</span> origin master
+</code></pre></div></div>
+
+<p>모든 branch들을 포함하여 push</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push --all
+</code></pre></div></div>
+
+<p>remote 확인</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote <span class="p">-</span><span class="k">v</span>
+</code></pre></div></div>
+
+<p>remote 변경</p>
+
+<ul>
+  <li>Repository not found 에러 시 사용함</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote set-url origin https://{git username}@github.com/{git username}/{repository name}.git
+
+ex) git remote set-url origin https://futuremaker019@github.com/futuremaker019/TIL.git
+
+로그인 화면이 나오면 해당 Repository의 계정으로 로그인을 해서 push한다.
+</code></pre></div></div>
+
+<p>pull 명령 실행시 이미 존재하는 두 프로젝트의 기록(history)을 저장하는 상황에 사용하는 명령어</p>
+
+<ul>
+  <li>git에서 서로 관련 기록이 없는 이질적인 두 프로젝트를 병합할 때 사용한다.</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin 브런치명 <span class="p">--</span>allow<span class="p">-</span>unrelated<span class="p">-</span>histories
+</code></pre></div></div>
+
+<p>branch push</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="p">--</span><span class="k">set</span><span class="p">-</span>upstream origin <span class="p">[</span>branch 명<span class="p">]</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="에러-모음">에러 모음</h3>
+
+<p>File too long 해결한 명령어</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global core.longpaths true
+
+or
+
+git config --system core.longpaths true
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="upsteam">Upsteam</h3>
+
+<hr />
+
+<ul>
+  <li>Upstream이란
+    <ul>
+      <li>다른 사람의 GitHub의 저장소를 Fork한 경우 내 Github가 origin이 된다. 처음 fork를 시도한 저장소를 upstream이라고 부른다. origin과 upstream 모두 romote 저장소이다. 보통 origin과 구분하기 위해서 upstream 이라는 명칭을 주로 사용한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/etc/git-flow.png" width="650" /></p>
+
+
+
+
+<hr>
+
+<div id="disqus_thread"></div>
+
+
+  <div class="credits">&copy;&nbsp;2025&nbsp;Abhinav Saxena
+    &nbsp;
+    •
+    &nbsp;Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+    &nbsp;
+    •
+    &nbsp;Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+  </div>
+
+
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  
+  var disqus_config = function () {
+  this.page.url = 'https://futuremaker019.github.io/git-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%A0%95%EB%A6%AC';  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/Git 명령어 정리'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-futuremaker019-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+        </div>
+
+      
+
+    </main>
+
+     <!-- dark, light  -->
+    
+        <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+    <script async defer src="https://sdk.soopr.co/soopr.js"></script></body>
+</html>

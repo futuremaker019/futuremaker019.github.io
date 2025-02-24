@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      Tcp
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.7.3 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Tcp" />
+<meta name="author" content="Abhinav Saxena" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TCP란" />
+<meta property="og:description" content="TCP란" />
+<link rel="canonical" href="http://localhost:4000/tcp" />
+<meta property="og:url" content="http://localhost:4000/tcp" />
+<meta property="og:site_name" content="futuremaker’s blog" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/tcp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-18T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/tcp" />
+<meta property="twitter:title" content="Tcp" />
+<meta name="twitter:site" content="@abhinav" />
+<meta name="twitter:creator" content="@Abhinav Saxena" />
+<script type="application/ld+json">
+{"headline":"Tcp","url":"http://localhost:4000/tcp","datePublished":"2023-11-18T00:00:00+09:00","dateModified":"2023-11-18T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/tcp"},"author":{"@type":"Person","name":"Abhinav Saxena"},"@type":"BlogPosting","description":"TCP란","@context":"https://schema.org"}</script>
+<script async defer data-soopr-token="pt_86c48a585d77ba8441f155e3e016788c" src="https://sdk.soopr.co/soopr.js"  ></script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="futuremaker&apos;s blog" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="post-wrapper" aria-label="Content">
+        
+        <div class="post-content">
+
+            <!-- content here -->
+            
+  <a href="/study">study</a>
+
+
+<h1 class="post-title">Tcp</h1>
+
+<aside class="sticky-sidebar">
+  <div class="toc-container">
+    
+    <div class="toc">
+
+        
+    
+    </div>
+</div>
+</aside>
+
+
+<p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">November 2023</span>
+  
+
+
+  
+  
+  (510 Words, 
+  3 Minutes)
+  
+
+</p>
+
+<div class='soopr-btn'></div>
+
+
+
+  <div class="">
+    
+    <span class="tag">프로토콜</span>
+    
+    <span class="tag">study</span>
+    
+  </div>
+
+
+
+
+
+<h3 id="tcp란">TCP란</h3>
+
+<ul>
+  <li>Transmission Control Protocal의 약자로 메일이나 파일 전송, 웹브라우저 등 데이터 전송시 신뢰성을 요구하는 애플리케이션에서 사용한다.</li>
+  <li>TCP는 애플리케이션 데이터를 송신하기 전에 TCP 커넥션이라는 논리적인 통신로를 만들어 통신 환경을 정비한다.</li>
+  <li>송신 파이프, 수신 파이프를 이용해 송신 전용, 수신 전용으로 사용하며 데이터를 보냈는지 받았는지 확인하며 통신한다.</li>
+</ul>
+
+<h3 id="3-way-handshake">3 way handshake</h3>
+
+<p><img data-action="zoom" src="/assets/images/post/3-way.png" alt="absolute" width="500" /></p>
+
+<p>TCP에서의 전이 상태 중 접속 시작 단계의 과정이다.</p>
+
+<ol>
+  <li>3 way handshake 시작 전 클라이언트는 <code class="language-plaintext highlighter-rouge">CLOSED</code>, 서버는 <code class="language-plaintext highlighter-rouge">LISTEN</code> 상태이다.</li>
+  <li>클라이언트는 <code class="language-plaintext highlighter-rouge">SYN 패킷</code>을 송신하고, 오픈 처리에 들어간다. 이 처리에 따라 클라이언트는 <code class="language-plaintext highlighter-rouge">SYN-SENT</code> 상태로 이동하고, 계속해서 <code class="language-plaintext highlighter-rouge">SYN/ACK</code> 패킷을 기다린다.</li>
+  <li><code class="language-plaintext highlighter-rouge">SYN 패킷</code>을 받아들인 서버는 패시브 오픈 처리에 들어간다. <code class="language-plaintext highlighter-rouge">SYN</code> 플래그와 <code class="language-plaintext highlighter-rouge">ACK</code> 플래그를 <code class="language-plaintext highlighter-rouge">1</code>로 설정한 <code class="language-plaintext highlighter-rouge">SYN/ACK 패킷</code>을 반환하고 <code class="language-plaintext highlighter-rouge">SYN-RECEIVED</code> 상태로 이동한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">SYN/ACK 패킷</code>을 받아들인 클라이언트는 <code class="language-plaintext highlighter-rouge">ACK 플래그</code>를 <code class="language-plaintext highlighter-rouge">1</code>로 설정한 <code class="language-plaintext highlighter-rouge">ACK 패킷</code>을 반환하고, <code class="language-plaintext highlighter-rouge">ESTABLISHED</code> 상태로 이동한다. <code class="language-plaintext highlighter-rouge">ESTABLISHED</code>는 커넥션이 완료된 상태이다. 이 상태가 되면 처음으로 실제 애플레케이션 데이터를 송수신할 수 있게 된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">ACK 패킷</code>을 받아들인 서버는 <code class="language-plaintext highlighter-rouge">ESTABLISHED 상태</code>로 이동한다. 이 상태가 되면 처음으로 실제 애플리케이션 데이터를 송수신할 수 있게 된다.</li>
+</ol>
+
+<hr />
+
+<p>3 way handshake가 완료되면 실제 애플리케이션 데이터의 교환이 일어나는데 TCP는 애플리케이션 데이터 전송의 신뢰성을 확보하기 위해 <code class="language-plaintext highlighter-rouge">흐름제어</code>, <code class="language-plaintext highlighter-rouge">혼잡제어</code>, <code class="language-plaintext highlighter-rouge">재전송 제어</code> 라는 3가지 제어를 잘 조합해 가며 전송한다.</p>
+
+<h3 id="tcp-빠른-재전송이란">TCP 빠른 재전송이란</h3>
+
+<p>제전송 제어는 패킷 유실이 발생했을 때 수행하는 패킷 재전송 기능이다. TCP는 ACK 패킷을 통해 패킷 유실을 감지하고, 패킷을 재전송한다.</p>
+
+<p>수신 측 단말은 받은 TCP 세그먼트의 번호가 일정하지 않으면 패킷 유실이 발생했다고 판단하며 확인 응답이 같은 ACK 패킷을 연속해서 송출한다. 이 ACK 패킷을 <code class="language-plaintext highlighter-rouge">중복 ACK</code>라 부른다.</p>
+
+<p>송신 측 단말은 일정 수 이상 중복 ACK를 받으면 대상이 되는 TCP 세그먼트를 재전송한다. 중복 ACK를 트리거로 하는 재전송 제어를 <code class="language-plaintext highlighter-rouge">Fast Retransmit(고속 재전송)</code>이라 부른다.</p>
+
+<h3 id="congestion-control-이란">Congestion control 이란</h3>
+
+<p>혼잡제 제어는 송신 측 단말이 수행하는 흐름양 조정이다. 혼잡이란 네트워크의 복잡한 상태를 의미하며, 일시적으로 많은 트래픽이 몰리면서 네트워크상에 패킷이 갑자기 혼잡하게 되기 떄문이다.</p>
+
+<p>TCP는 대량의 송신 패킷에 의해 네트워크가 혼잡하지 않도록 <code class="language-plaintext highlighter-rouge">혼잡 제어 알고리즘</code> 이용하여 패킷 송신 수를 제어한다. 이 패킷 송신 수를 <code class="language-plaintext highlighter-rouge">혼잡 윈도우</code>라 부른다. 혼잡 제어 알고리즘은 혼잡하면 혼잡 윈도우를 줄이고 혼잡하지 않으면 윈도우를 늘립니다.</p>
+
+<h3 id="flow-control-이란">Flow control 이란</h3>
+
+<p><code class="language-plaintext highlighter-rouge">흐름제어(Flow control)</code> 은 수신 측 단말이 수행하는 흐름양 조정이다. 수신 측 단말은 윈도우 크기 필드를 사용해 자신이 받을 수 있는 데이터양을 알린다. 송신 측 단말은 윈도우 크기 이내에는 확인 응답을 기다리지 않고 계속 TCP 세그먼트를 보내지만, 그 이상의 데이터는 보내지 않는다. 그렇게 함으로 써 수신 측 단말이 받아들이지 못하는 일이 없도록 하면서, 가능한 많은 데이터를 송신한다. 이런 일련의 동작을 <code class="language-plaintext highlighter-rouge">슬라이딩 윈도우</code> 라고 부른다.</p>
+
+<h3 id="4-way-handshake">4 way handshake</h3>
+
+<p><img data-action="zoom" src="/assets/images/post/4-way.png" alt="absolute" width="500" /></p>
+
+<p>애플리케이션 데이터의 교환을 마치면 커넥션 종료 처리를 한다. 커넥션의 시작은 클라이언트의 SYN 으로부터 시작하지만 클로즈는 클라이언트, 서버 관계없이 먼저 <code class="language-plaintext highlighter-rouge">FIN</code><sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> 을 송출해서 커넥션을 종료하려는 측의 처리를 <code class="language-plaintext highlighter-rouge">액티브 클로즈</code>, 그것을 받는 측의 처리를 <code class="language-plaintext highlighter-rouge">패시브 클로즈</code>라 부른다.</p>
+
+<h4 id="동작과정">동작과정</h4>
+
+<ol>
+  <li>클라이언트는 데이터 교환을 마치고, 액티브 클로즈 처리를 실시한다. FIN 플래그와 ACK 플래그를 <code class="language-plaintext highlighter-rouge">1</code>로 한 <code class="language-plaintext highlighter-rouge">FIN/ACK 패킷</code>을 송신한다. 그리고 <code class="language-plaintext highlighter-rouge">FIN-WAIT1</code> 상태로 이동한다.</li>
+  <li>FIN/ACK 패킷을 받은 서버는 패시브 클로즈 처리를 시작한다. ACK 패킷을 송신하고, 애플리케이션으로부터 클로즈 요청을 기다리는 <code class="language-plaintext highlighter-rouge">CLOSE-WAIT</code> 상태로 이동한다.</li>
+  <li>ACK 를 받은 클라이언트는 서버로부터 FIN/ACK 패킷을 기다리는 FIN-WAIT2 상태로 이동한다.</li>
+  <li>서버는 FIN/ACK 를 송신하고 자신이 송신한 FIN/ACK 패킷에 대한 ACK 패킷(클로즈 처리에 대한 최후 ACK)를 기다리는 <code class="language-plaintext highlighter-rouge">LAST-ACK</code> 단계로 이동한다.</li>
+  <li>FIN/ACK를 받은 클라이언트는 ACK 패킷을 반송하고 <code class="language-plaintext highlighter-rouge">TIME_WAIT</code> 상태로 이동한다.</li>
+  <li>ACK 패킷을 받은 서버는 <code class="language-plaintext highlighter-rouge">CLOSED</code> 상태로 이동하고, 커넥션을 삭제한다. 이와 함께, 이 커넥션에 확보하고 있던 자원을 모두 해제한다. 이것을 <code class="language-plaintext highlighter-rouge">패시브 클로즈</code>를 종료한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">TIME-WAIT</code>에 대기중인 클라이언트는 <code class="language-plaintext highlighter-rouge">CLOSED</code> 상태로 이동해, 커넥션을 삭제한다. 이것으로 <code class="language-plaintext highlighter-rouge">액티브 클로즈</code>를 종료한다.</li>
+</ol>
+
+<p>출처</p>
+<ul>
+  <li>그림으로 공부하는 TCP/IP 구조(제이펍 출판)</li>
+  <li><a href="https://bangu4.tistory.com/74">https://bangu4.tistory.com/74</a></li>
+</ul>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>FIN 패킷이라고 하면 FIN 플래그가 ‘1’인 TCP 세그먼트라고한다. FIN 플래그는 ‘더이상 교환할 데이터가 없습니다.’ 를 의미하는 플래그로, 상위 애플리케이션의 동작에 맞춘 형태로 부여한다. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+
+<hr>
+
+<div id="disqus_thread"></div>
+
+
+  <div class="credits">&copy;&nbsp;2025&nbsp;Abhinav Saxena
+    &nbsp;
+    •
+    &nbsp;Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+    &nbsp;
+    •
+    &nbsp;Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+  </div>
+
+
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  
+  var disqus_config = function () {
+  this.page.url = 'https://futuremaker019.github.io/tcp';  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/TCP'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-futuremaker019-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+        </div>
+
+      
+
+    </main>
+
+     <!-- dark, light  -->
+    
+        <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+    <script async defer src="https://sdk.soopr.co/soopr.js"></script></body>
+</html>

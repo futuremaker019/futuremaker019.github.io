@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      Https, dns
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.7.3 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Https, dns" />
+<meta name="author" content="Abhinav Saxena" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="HTTPS란" />
+<meta property="og:description" content="HTTPS란" />
+<link rel="canonical" href="http://localhost:4000/https-dns" />
+<meta property="og:url" content="http://localhost:4000/https-dns" />
+<meta property="og:site_name" content="futuremaker’s blog" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/https-dns" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-10T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/https-dns" />
+<meta property="twitter:title" content="Https, dns" />
+<meta name="twitter:site" content="@abhinav" />
+<meta name="twitter:creator" content="@Abhinav Saxena" />
+<script type="application/ld+json">
+{"headline":"Https, dns","url":"http://localhost:4000/https-dns","datePublished":"2023-11-10T00:00:00+09:00","dateModified":"2023-11-10T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/https-dns"},"author":{"@type":"Person","name":"Abhinav Saxena"},"@type":"BlogPosting","description":"HTTPS란","@context":"https://schema.org"}</script>
+<script async defer data-soopr-token="pt_86c48a585d77ba8441f155e3e016788c" src="https://sdk.soopr.co/soopr.js"  ></script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="futuremaker&apos;s blog" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="post-wrapper" aria-label="Content">
+        
+        <div class="post-content">
+
+            <!-- content here -->
+            
+  <a href="/study">study</a>
+
+
+<h1 class="post-title">Https, dns</h1>
+
+<aside class="sticky-sidebar">
+  <div class="toc-container">
+    
+    <div class="toc">
+
+        
+    
+    </div>
+</div>
+</aside>
+
+
+<p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">November 2023</span>
+  
+
+
+  
+  
+  (678 Words, 
+  4 Minutes)
+  
+
+</p>
+
+<div class='soopr-btn'></div>
+
+
+
+  <div class="">
+    
+    <span class="tag">HTTPS</span>
+    
+    <span class="tag">DNS</span>
+    
+    <span class="tag">UDP</span>
+    
+    <span class="tag">대기 프로토콜</span>
+    
+    <span class="tag">파이프라인 프로토콜</span>
+    
+    <span class="tag">study</span>
+    
+  </div>
+
+
+
+
+
+<h3 id="https란">HTTPS란</h3>
+
+<p><code class="language-plaintext highlighter-rouge">HTTPS(HyperText Transfer Protocal Secure)</code>는 <code class="language-plaintext highlighter-rouge">HTTP protocal</code>의 암호화된 버전이다. 이것은 대개 클라이언트와 서버간의 모든 커뮤니케이션을 암호화 하기 위하여 <code class="language-plaintext highlighter-rouge">SSL</code> 또는 <code class="language-plaintext highlighter-rouge">TLS</code>을 사용한다. 이 보안 연결은 클라이언트가 민감한 정보를 서버와 안전하게 주고받도록 해준다.</p>
+
+<p>출처 : <a href="https://developer.mozilla.org/ko/docs/Glossary/HTTPS">https://developer.mozilla.org/ko/docs/Glossary/HTTPS</a></p>
+
+<hr />
+
+<p><br /></p>
+
+<h3 id="ssltls란">SSL/TLS란</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>SSL</th>
+      <th>TLS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SSL은 보안 소켓 계층의 약자입니다,</td>
+      <td>TLS는 전송 계층 보안의 약자입니다.</td>
+    </tr>
+    <tr>
+      <td>SSL 1.0, SSL 2.0, SSL 3.0</td>
+      <td>TLS 1.0, TLS 1.1, TLS 1.2, TLS 1.3</td>
+    </tr>
+    <tr>
+      <td>모든 버전의 SSL에서 취약점이 발견되어 모두 사용 중단되었다.</td>
+      <td>대부분의 경우 TLS 1.2 가 사용된다.</td>
+    </tr>
+    <tr>
+      <td>웹 서버와 클라이언트는 명시적 연결을 사용하는 암호화 프로토콜인 SSL을 사용하여 안전하게 통신한다.</td>
+      <td>TLS를 사용하면 윕 서버와 클라이언트는 암시적 연결을 통해 안전하게 통신 할 수 있다. TLS가 SSL을 대체했다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>출처 : <a href="https://aws.amazon.com/ko/compare/the-difference-between-ssl-and-tls/">https://aws.amazon.com/ko/compare/the-difference-between-ssl-and-tls/</a></p>
+
+<hr />
+
+<p><br /></p>
+
+<h3 id="https-암호화-과정에-대해-설명해주세요ssl-handshake의-동작-과정을-설명해-주세요">HTTPS 암호화 과정에 대해 설명해주세요(SSL Handshake의 동작 과정을 설명해 주세요.)</h3>
+
+<blockquote>
+  <p>public-private Key Pair로 symmetric key를 생성한다는게 포인트</p>
+</blockquote>
+
+<p>동작방식</p>
+
+<ol>
+  <li>브라우저가 최초 요청시 <code class="language-plaintext highlighter-rouge">서버의 공개키</code>와 <code class="language-plaintext highlighter-rouge">개인키</code> 중 <code class="language-plaintext highlighter-rouge">공개키</code>가 브라우저에 전달됨</li>
+  <li><code class="language-plaintext highlighter-rouge">브라우저의 개인키</code>를 서버에서 넘어온 <code class="language-plaintext highlighter-rouge">공개키</code>가 암호화하여 서버로 전달함</li>
+  <li>서버에서는 넘어온 <code class="language-plaintext highlighter-rouge">브라우저의 개인키</code>를 <code class="language-plaintext highlighter-rouge">서버의 개인키</code>로 복호화하여 서버에 저장한다.</li>
+  <li>종합적으로 키는 다음과 같이 존재한다.
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">브라우저</code>에는 <code class="language-plaintext highlighter-rouge">서버의 공개키</code>, <code class="language-plaintext highlighter-rouge">브라우저의 개인키</code>가 존재</li>
+      <li><code class="language-plaintext highlighter-rouge">서버</code>에는 <code class="language-plaintext highlighter-rouge">서버의 공개키</code>, <code class="language-plaintext highlighter-rouge">개인키</code>, <code class="language-plaintext highlighter-rouge">브라우저의 개인키</code>가 존재함</li>
+    </ol>
+  </li>
+  <li>브라우저는 <code class="language-plaintext highlighter-rouge">서버의 공개키</code>와 <code class="language-plaintext highlighter-rouge">브라우저의 개인키</code>로 <code class="language-plaintext highlighter-rouge">symmetric key</code>를 만든다.</li>
+  <li>서버는 <code class="language-plaintext highlighter-rouge">서버의 공개키</code>와 넘어온 <code class="language-plaintext highlighter-rouge">브라우저의 개인키</code>로 <code class="language-plaintext highlighter-rouge">symmetric key</code>를 만들어 요청이 들어오면 해당 키를 비교하여 동일한지 확인한다.</li>
+</ol>
+
+<p>위와 같이 키를 비교하는 방식으로는 중간자 공격<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>을 방어하지 못한다.</p>
+
+<p>3rd party certificate를 사용하여 서버에 인증서를 저장하는데 해당 인증서는 브라우저에서 요청이 올때 공개키와 함께 서버에서 브라우저로 전달된다. 브라우저는 헤당 인증서를 확인하여 현재 접속한 사이트가 신뢰할 수있는 사이트인지 확인한다.</p>
+
+<p>출처 : <a href="https://www.youtube.com/watch?v=kBlQiwXSx8A&amp;t=1s">https://www.youtube.com/watch?v=kBlQiwXSx8A&amp;t=1s</a></p>
+
+<hr />
+
+<p><br /></p>
+
+<h3 id="대칭-키와-비대칭-키의-차이가-무엇인가요">대칭 키와 비대칭 키의 차이가 무엇인가요?</h3>
+
+<h4 id="대칭키">대칭키</h4>
+
+<p>어떤 정보를 암호화, 복호화 할 때 사용하는 키가 동일한 경우 <code class="language-plaintext highlighter-rouge">대칭키</code>라고 한다. 어떠한 정보가 대칭키를 통해 암호화 되엉ㅆ다면, 똑같은 키를 갖고 있는 사용자가 아니면 해당 정보를 확인 할 수 없다. 따라서 암호화 된 정보를 전달하고 확인하기 위해서는 송, 수신자 둘 다 똑같은 키를 가지고 있어야 한다.</p>
+
+<p>단점 : 탈취시 누구나 열어볼 수 있다.</p>
+
+<h4 id="비대칭키">비대칭키</h4>
+
+<p>어떤 정보를 암호화, 복호화 할 때 사용하는 키가 서로 다른 경우 <code class="language-plaintext highlighter-rouge">비대칭키</code>라고 한다. 비대칭키를 활용한 암호화에는 개인키와 공개키 두가지가 사용된다. 또한 대칭키를 활용한 암호화는 개인키로 암호화하는 방식과 공개키로 암호화하는 방식 두가지가 있다.</p>
+
+<ul>
+  <li>상대방의 공개키를 통헤 암호화, 상대방이 개인키를 통한 복호화
+    <ul>
+      <li>정보 자체에 대한 암호화가 필요 할 때 사용</li>
+    </ul>
+  </li>
+  <li>자신의 개인키를 통한 암호화, 자신의 공개키를 통한 복호화
+    <ul>
+      <li>정보를 생산(송신)한 사람의 신원에 대한 정보가 필요할 때 사용</li>
+    </ul>
+  </li>
+</ul>
+
+<p>출처 : <a href="https://universitytomorrow.com/22">https://universitytomorrow.com/22</a></p>
+
+<hr />
+
+<p><br /></p>
+
+<h3 id="dns가-뭔가요">DNS가 뭔가요?</h3>
+
+<p>도메인 이름 시스템(DNS)은 사람이 읽을 수 있는 도메인 이름을 머신이 읽을 수 있는 IP 주소로 변환시켜주는 것이다.</p>
+
+<hr />
+
+<p><br /></p>
+
+<h3 id="dns-작동-방식에-대해-설명해주세요">DNS 작동 방식에 대해 설명해주세요.</h3>
+
+<ol>
+  <li>사용자가 브라우저에서 https://www.google.com에 엑세스</li>
+  <li>DNS 서버로 DNS 쿼리를 전송</li>
+  <li>DNS 서버로부터 해당하는 IP를 받음</li>
+  <li>IP를 이용하여 google 서버 호촐</li>
+  <li>goolge 웹서버로부터 HTTPS 리스폰스</li>
+</ol>
+
+<hr />
+
+<p><br /></p>
+
+<h3 id="dns-질의-종류에-대해-설명해주세요">DNS 질의 종류에 대해 설명해주세요.</h3>
+
+<h4 id="재귀적-recursive-queries-재귀-질의">재귀적 (Recursive Queries, 재귀 질의)</h4>
+
+<ul>
+  <li>질의된 도메인에 대해 즉각 응답하거나, 다른 서버에게 질의한 결과로 응답하거나, 찾고 있는 정보가 없다는 에러 메시지를 보내줌</li>
+  <li>가장 단순한 DNS 쿼리 유형</li>
+</ul>
+
+<h4 id="반복적-iterative-queries-반복-질의">반복적 (Iterative Queries, 반복 질의)</h4>
+
+<ul>
+  <li>질의된 도메인에 대해 응답하거나, 아니면 이 작업을 할 수 있는 다른 DNS 서버에 클라이언트를 연결 시켜 주는 작업</li>
+  <li>자신이 관리하지 않는 알 수 없는 질의에 대해 응답 가능한 네임서버 목록 전달</li>
+  <li>
+    <p>결국, 클라이언트는 다수의 DNS 서버들에게 같은 질의를 반복할 수 있게됨</p>
+  </li>
+  <li>재귀질의 및 반복질의 선택은, DNS 해석기가 이를 요청할 때 스스로 선택 결정하여 DNS 헤더 내 플래그 필드에 그 표식을 함</li>
+</ul>
+
+<hr />
+
+<p><br /></p>
+
+<h3 id="dns-서버에게-ip-주소를-요청할-때-왜-udp를-사용하나요">DNS 서버에게 IP 주소를 요청할 때, 왜 UDP를 사용하나요?</h3>
+
+<p>DNS는 <code class="language-plaintext highlighter-rouge">이름 결정(name resolution)</code><sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>과 <code class="language-plaintext highlighter-rouge">존 전송(zone transfer)</code><sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup>이라는 2개 구조를 제공한다. 이 2개 구조는 역할이나 기능, 사용하는 레이어4 프로토콜(Transfer) 등 모든 점에서 크게 다르다. 이름 결정은 웹 엑세스나 메일 전송 등 애플리케이션 통신에 앞서 수행된다. 이 처리에 시간이 걸리면 그 이후의 애플리케이션 통신도 점점 지연된다. 그래서 이름 결정은 UDP(포트 53)를 사용해 처리 속도를 우선한다.</p>
+
+<hr />
+
+<p><br /></p>
+
+<h3 id="dns-레코드가-무엇인가요">DNS 레코드가 무엇인가요?</h3>
+
+<p>하나의 존 파일로 관리하는 도메인 이름의 범위를 <code class="language-plaintext highlighter-rouge">존(Zone)</code>이라고 부른다. 존 파일은 여러 종류의 리소스 레코드로 구성되어 있으며, 그 안에 모든 존이 들어있다. 권위 서버<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">4</a></sup>는 존 파일의 정보에 기반해 반복 쿼리에 응답한다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>공격자가 클라이언트가 요청한 사이트를 위조하여 클라이언트가 위조된 사이트를 사용하게 만드는 것을 말한다. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>IP 주소와 도메인 이름을 서로 교환하는 처리를 이름결정이라고 부른다. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>같은 존 파일을 보존하기 위해, DNS 서버 사이에 존 파일을 동기하는 처리를 존 전송이라 부른다. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>자신이 관리하는 도메인에 관해 캐시 서버로부터의 반복 쿼리를 받아들이는 DNS 서버를 권위 서버라고 한다. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+
+<hr>
+
+<div id="disqus_thread"></div>
+
+
+  <div class="credits">&copy;&nbsp;2025&nbsp;Abhinav Saxena
+    &nbsp;
+    •
+    &nbsp;Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+    &nbsp;
+    •
+    &nbsp;Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+  </div>
+
+
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  
+  var disqus_config = function () {
+  this.page.url = 'https://futuremaker019.github.io/https-dns';  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/HTTPS, DNS'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-futuremaker019-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+        </div>
+
+      
+
+    </main>
+
+     <!-- dark, light  -->
+    
+        <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+    <script async defer src="https://sdk.soopr.co/soopr.js"></script></body>
+</html>

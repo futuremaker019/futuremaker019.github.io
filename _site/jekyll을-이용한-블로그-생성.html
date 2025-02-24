@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      Jekyll을 이용한 블로그 생성
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.7.3 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Jekyll을 이용한 블로그 생성" />
+<meta name="author" content="Abhinav Saxena" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="github 블로그" />
+<meta property="og:description" content="github 블로그" />
+<link rel="canonical" href="http://localhost:4000/jekyll%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%83%9D%EC%84%B1" />
+<meta property="og:url" content="http://localhost:4000/jekyll%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%83%9D%EC%84%B1" />
+<meta property="og:site_name" content="futuremaker’s blog" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/jekyll%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%83%9D%EC%84%B1" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-11-13T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/jekyll%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%83%9D%EC%84%B1" />
+<meta property="twitter:title" content="Jekyll을 이용한 블로그 생성" />
+<meta name="twitter:site" content="@abhinav" />
+<meta name="twitter:creator" content="@Abhinav Saxena" />
+<script type="application/ld+json">
+{"headline":"Jekyll을 이용한 블로그 생성","url":"http://localhost:4000/jekyll%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%83%9D%EC%84%B1","datePublished":"2024-11-13T00:00:00+09:00","dateModified":"2024-11-13T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/jekyll%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%83%9D%EC%84%B1"},"author":{"@type":"Person","name":"Abhinav Saxena"},"@type":"BlogPosting","description":"github 블로그","@context":"https://schema.org"}</script>
+<script async defer data-soopr-token="pt_86c48a585d77ba8441f155e3e016788c" src="https://sdk.soopr.co/soopr.js"  ></script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="futuremaker&apos;s blog" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="post-wrapper" aria-label="Content">
+        
+        <div class="post-content">
+
+            <!-- content here -->
+            
+  <a href="/blog">blog</a>
+
+
+<h1 class="post-title">Jekyll을 이용한 블로그 생성</h1>
+
+<aside class="sticky-sidebar">
+  <div class="toc-container">
+    
+    <div class="toc">
+
+        <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#github-블로그">github 블로그</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#github-io-로-블로그-템플릿-설정">github io 로 블로그 템플릿 설정</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#window에서-jekyll-실행">Window에서 jekyll 실행</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#ruby-설치">ruby 설치</a></li>
+<li class="toc-entry toc-h3"><a href="#jekyll-설치가-제대로-되지-않았을-때">Jekyll 설치가 제대로 되지 않았을 때</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#mac-에서-jekeyll-실행하기-silicon">Mac 에서 jekeyll 실행하기 (Silicon)</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#ruby-설치-1">ruby 설치</a></li>
+</ul>
+</li>
+</ul>
+    
+    </div>
+</div>
+</aside>
+
+
+<p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">November 2024</span>
+  
+
+
+  
+  
+  (286 Words, 
+  2 Minutes)
+  
+
+</p>
+
+<div class='soopr-btn'></div>
+
+
+
+  <div class="">
+    
+    <span class="tag">Jekyll</span>
+    
+    <span class="tag">ETC</span>
+    
+    <span class="tag">blog</span>
+    
+  </div>
+
+
+
+
+
+<h2 id="github-블로그">github 블로그</h2>
+
+<h3 id="github-io-로-블로그-템플릿-설정">github io 로 블로그 템플릿 설정</h3>
+
+<p><code class="language-plaintext highlighter-rouge">jekyll-theme</code> 에서 테마 선택</p>
+
+<p><a href="https://github.com/topics/jekyll-theme">https://github.com/topics/jekyll-theme</a></p>
+
+<p>선택한 테마의 github으로 들어가서 <code class="language-plaintext highlighter-rouge">fork</code> 함</p>
+
+<p>fork 한 repository에 들어가 setting에서 Repository명을 github.io 형태로 변경</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ex) futuremaker019.github.io
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">_config.yml</code> 의 <code class="language-plaintext highlighter-rouge">url</code> 수정</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>url : "https://futuremaker019.github.io"
+</code></pre></div></div>
+
+<p>블로그 들어가서 확인</p>
+
+<p><br /></p>
+
+<h2 id="window에서-jekyll-실행">Window에서 jekyll 실행</h2>
+
+<h3 id="ruby-설치">ruby 설치</h3>
+
+<p>블로그를 커스터마이징 하기위해 매번 push하여 확인하는 귀찮은 일이 발생하므로 로컬에서 jekyll을 실행하여 수정을 바로 확인하기 위해 Ruby 필요</p>
+
+<p><a href="https://rubyinstaller.org/downloads/">Ruby installer</a>에 접속하여 WITH Devkit 에서 Ruby+Devkit 3.2.2-1 (x84) 다운 및 설치 (jekyll은 32bit라고 함)</p>
+
+<blockquote>
+  <p>MSYS32는 Window의 cmd에서 Ruby 명령어를 사용할 수 있도록 해준다.</p>
+</blockquote>
+
+<p><img src="/assets/images/etc/ruby.png" width="500" /></p>
+
+<p><br /></p>
+
+<p>인스톨시 Ruby install 관련 cmd가 나오는데 그냥 엔터로 진행하자</p>
+
+<p>인스톨 완료 후 ruby가 설치 됬는지 ruby 버전확인</p>
+
+<pre><code class="language-vi">ruby -v
+</code></pre>
+
+<p>jekyll ruby gem 설치</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install bundler jekyll
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">jekyll</code> 버전 확인</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll -v
+</code></pre></div></div>
+
+<p>jekyll 실행 명령어</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle exec jekyll serve
+
+jekyll serve --watch (해보지 않음)
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="jekyll-설치가-제대로-되지-않았을-때">Jekyll 설치가 제대로 되지 않았을 때</h3>
+
+<p>jekyll 설치가 제대로 안되서 <code class="language-plaintext highlighter-rouge">jekyll -v</code> 명령어 실행이 안됨. 아래는 오류 내용</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Could not find jekyll-4.2.2, jekyll-feed-0.15.1, jekyll-soopr-seo-tag-2.7.3, rouge-3.23.0, webrick-1.7.0, addressable-2.8.1, i18n-1.12.0, jekyll-sass-converter-2.2.0, liquid-4.0.3, terminal-table-2.0.0, public_suffix-5.0.0, concurrent-ruby-1.1.10, sassc-2.4.0, listen-3.7.1, unicode-display_width-1.8.0, ffi-1.15.5 in locally installed gems (Bundler::GemNotFound)  
+
+ Run `bundle install` to install missing gems.
+</code></pre></div></div>
+
+<p>아래 친절하게 bundle install 하라는 명령어가 나와 명령어 입력</p>
+
+<p>그리고 실행</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>undefined method `tainted?' for "/":String (NoMethodError)
+return unless obj.tainted?
+</code></pre></div></div>
+
+<p>여전히 에러</p>
+
+<p><br /></p>
+
+<p>해결</p>
+
+<p><code class="language-plaintext highlighter-rouge">GemFile.lock</code> 파일을 지우고 다시 실행 명령어 입력하니 실행됨 (GemFile.lock 파일이 다시 생성됨)</p>
+
+<hr />
+
+<h2 id="mac-에서-jekeyll-실행하기-silicon">Mac 에서 jekeyll 실행하기 (Silicon)</h2>
+
+<h3 id="ruby-설치-1">ruby 설치</h3>
+
+<pre><code class="language-vi">$ gem install bundler jekyll
+</code></pre>
+
+<p>위 명령어 입력시 에러남</p>
+<pre><code class="language-vi">ERROR:  While executing gem ... (Gem::FilePermissionError)
+You don't have write permissions for the /Library/Ruby/Gems/2.6.0 directory.
+</code></pre>
+
+<p>해결</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ brew update
+$ brew install rbenv ruby-build
+</code></pre></div></div>
+
+<p>설치된 ruby 버전을 확인하자</p>
+
+<pre><code class="language-vi">$ ruby --version
+ruby 3.2.2 (2023-03-30 revision e51014f9c0) [arm64-darwin23]
+</code></pre>
+
+<p>ruby 버전에 맞는 rbenv 버전으로 설치하자</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rbenv install -list
+
+3.1.6
+3.2.6
+3.3.6
+jruby-9.4.9.0
+</code></pre></div></div>
+
+<p>3.2.6 버전을 선택하여 설치</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rbenv install 3.2.6
+</code></pre></div></div>
+
+<p>설치된 rbenv version 확인</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rbenv versions
+---
+* system
+3.2.6
+</code></pre></div></div>
+
+<p>global 명령어로 설치된 버전 선택</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rbenv global 3.2.6
+</code></pre></div></div>
+
+<p>다시 budler 및 jekyll 설치</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gem install bundler jekyll
+</code></pre></div></div>
+
+<p>jekyll 버전 확인</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ jekyll -v 
+---
+jekyll 4.2.2
+</code></pre></div></div>
+
+<p>jekyll 업데이트 함</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle update jekyll
+</code></pre></div></div>
+
+<p>jekyll 실행</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle exec jekyll serve
+</code></pre></div></div>
+
+
+
+
+<hr>
+
+<div id="disqus_thread"></div>
+
+
+  <div class="credits">&copy;&nbsp;2025&nbsp;Abhinav Saxena
+    &nbsp;
+    •
+    &nbsp;Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+    &nbsp;
+    •
+    &nbsp;Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+  </div>
+
+
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  
+  var disqus_config = function () {
+  this.page.url = 'https://futuremaker019.github.io/jekyll%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%83%9D%EC%84%B1';  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/Jekyll을 이용한 블로그 생성'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-futuremaker019-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+        </div>
+
+      
+
+    </main>
+
+     <!-- dark, light  -->
+    
+        <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+    <script async defer src="https://sdk.soopr.co/soopr.js"></script></body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      Udp, 신뢰적 데이터 전송의 원리
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.7.3 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Udp, 신뢰적 데이터 전송의 원리" />
+<meta name="author" content="Abhinav Saxena" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="UDP란" />
+<meta property="og:description" content="UDP란" />
+<link rel="canonical" href="http://localhost:4000/udp-%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC" />
+<meta property="og:url" content="http://localhost:4000/udp-%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC" />
+<meta property="og:site_name" content="futuremaker’s blog" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/udp-%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-10T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/udp-%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC" />
+<meta property="twitter:title" content="Udp, 신뢰적 데이터 전송의 원리" />
+<meta name="twitter:site" content="@abhinav" />
+<meta name="twitter:creator" content="@Abhinav Saxena" />
+<script type="application/ld+json">
+{"headline":"Udp, 신뢰적 데이터 전송의 원리","url":"http://localhost:4000/udp-%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC","datePublished":"2023-11-10T00:00:00+09:00","dateModified":"2023-11-10T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/udp-%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC"},"author":{"@type":"Person","name":"Abhinav Saxena"},"@type":"BlogPosting","description":"UDP란","@context":"https://schema.org"}</script>
+<script async defer data-soopr-token="pt_86c48a585d77ba8441f155e3e016788c" src="https://sdk.soopr.co/soopr.js"  ></script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="futuremaker&apos;s blog" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="post-wrapper" aria-label="Content">
+        
+        <div class="post-content">
+
+            <!-- content here -->
+            
+  <a href="/study">study</a>
+
+
+<h1 class="post-title">Udp, 신뢰적 데이터 전송의 원리</h1>
+
+<aside class="sticky-sidebar">
+  <div class="toc-container">
+    
+    <div class="toc">
+
+        
+    
+    </div>
+</div>
+</aside>
+
+
+<p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">November 2023</span>
+  
+
+
+  
+  
+  (198 Words, 
+  2 Minutes)
+  
+
+</p>
+
+<div class='soopr-btn'></div>
+
+
+
+  <div class="">
+    
+    <span class="tag">UDP</span>
+    
+    <span class="tag">신뢰적 데이터 전송</span>
+    
+    <span class="tag">study</span>
+    
+  </div>
+
+
+
+
+
+<h3 id="udp란">UDP란</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">UDP(User Datagram Protocol)</code>란 음성통신(VoIP, Voice over IP)나 이름 결정, DHCP나 시각 동기화 등 즉시성을 요하는 애플리케이션에서 사용한다.</li>
+  <li>커넥션리스 타입 프로토콜이며 UDP 커넥션이라는 통신로를 만들고 애플리케이션 데이터를 송신한다.</li>
+  <li>포맷을 간단하게 하거나 확인 응답을 생략하는 등 즉시성을 향상하는 것을 목표로 한다.</li>
+</ul>
+
+<h3 id="udp의-장단점">UDP의 장단점</h3>
+
+<p>장점</p>
+
+<ul>
+  <li>핸드셰이크나 데이터가 제대로 도착했는지 확인하지 않기떄문에 TCP 보다 훨씬 빠르게 데이터를 전송할 수 있다.</li>
+  <li>비디오 재성, DNS 조회와 같이 시간에 민감한 전송을 위한 인터넷을 통해 사용된다.</li>
+</ul>
+
+<p>단점</p>
+
+<ul>
+  <li>TCP와 비교하여 먼저 연결을 설정하거나 패킷의 순서를 표시하거나, 의도한 대로 도착했는지 확인하지않아 신뢰성 및 안정성이 떨어진다.</li>
+  <li>전송중 패킷이 손실될수 있어 <code class="language-plaintext highlighter-rouge">DDoS 공격</code> <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>의 형태로 악용될 수 있다.</li>
+</ul>
+
+<h3 id="udp-체크섬에-대한-설명">UDP 체크섬에 대한 설명</h3>
+
+<ul>
+  <li>체크섬은 받아들인 <code class="language-plaintext highlighter-rouge">UDP 데이터그램</code> <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>의 손상 여부 정합성 체크에 사용되는 2바이트 필드 이다.</li>
+  <li>서버가 UDP 헤더에 포함된 <code class="language-plaintext highlighter-rouge">UDP 데이터그램 길이</code> <sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup>와 체크섬을 이용해 데이터가 손상되지 않았는가를 체크한다.(체크섬 검증) 체크섬 검증에 성공하면 데이터를 받아들인다.</li>
+</ul>
+
+<h3 id="전송후-대기-프로토콜이란">전송후 대기 프로토콜이란</h3>
+
+<h4 id="정지대기-프로토콜-stop-and-wait">정지대기 프로토콜 (Stop-and-Wait)</h4>
+
+<ul>
+  <li>가장 간단한 형태의 오류 제어 프로토콜 중 하나로 데이터를 전송한 후 수신자로부터 <code class="language-plaintext highlighter-rouge">확인(ACK)</code>을 받을 때까지 대기하는 방식이다.</li>
+</ul>
+
+<p>동작방식</p>
+
+<ol>
+  <li>송신자가 데이터 프레임을 수신자에게 전송합니다.</li>
+  <li>수신자는 데이터 프레임을 정상적으로 받으면 ACK(Positive Acknowledgement)를 송신자에게 보냅니다.</li>
+  <li>송신자는 ACK를 받을 때까지 기다립니다.</li>
+  <li>만약 송신자가 일정 시간 동안 ACK를 받지 못하면, 데이터 프레임을 재전송합니다.</li>
+</ol>
+
+<p>출처 : <a href="https://zrr.kr/UdB4">https://zrr.kr/UdB4</a></p>
+
+<h3 id="파이프라인-프로토콜이란">파이프라인 프로토콜이란</h3>
+
+<ul>
+  <li>데이터 처리와 전송을 효율적으로 수행하기 위한 기술적이 개념으로 사용된다.</li>
+  <li>파이프라인은 일련의 작업이 연속적으로 실행되는 것을 의미하며, 각 작업은 다음 작업으로의 입력이 되어 연결되어 있다.</li>
+</ul>
+
+<h4 id="go-back-n">Go-Back-N</h4>
+
+<p>Go-Back-N은 신뢰성 있는 데이터 전송을 위해 사용되는 오류 제어 프로토콜 중 하나로, 전송자와 수신자 간의 데이터 흐름을 관리하여 데이터의 손실이나 손상을 감지하고 복구하는 기술이다. Go-Back-N은 파이프라인 프로토콜의 한 형태로 볼 수 있으며, 데이터를 연속적으로 전송하는 방식으로 동작합니다.</p>
+
+<p>출처 : <a href="https://zrr.kr/UdB4">https://zrr.kr/UdB4</a></p>
+
+<p><br /></p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Distributed Denial of Service의 약자로 웹사이트 또는 네트워크 리소스 운영이 불가능하도록 악성 트래픽을 대량으로 보내는 공격이다. <br /> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>UDP 패킷을 데이터그램이라고 한다. <br /> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>UDP 데이터그램의 길이는 UDP 헤더와 UDP 페이로드를 합친 데이터 그림 전체 길이를 나타내는 2바이트 필드이다. <br /> <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+
+<hr>
+
+<div id="disqus_thread"></div>
+
+
+  <div class="credits">&copy;&nbsp;2025&nbsp;Abhinav Saxena
+    &nbsp;
+    •
+    &nbsp;Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+    &nbsp;
+    •
+    &nbsp;Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+  </div>
+
+
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  
+  var disqus_config = function () {
+  this.page.url = 'https://futuremaker019.github.io/udp-%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC';  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/UDP, 신뢰적 데이터 전송의 원리'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-futuremaker019-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+        </div>
+
+      
+
+    </main>
+
+     <!-- dark, light  -->
+    
+        <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+    <script async defer src="https://sdk.soopr.co/soopr.js"></script></body>
+</html>

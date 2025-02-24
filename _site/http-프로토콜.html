@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      Http 프로토콜
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.7.3 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Http 프로토콜" />
+<meta name="author" content="Abhinav Saxena" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="HTTP 프로토콜" />
+<meta property="og:description" content="HTTP 프로토콜" />
+<link rel="canonical" href="http://localhost:4000/http-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C" />
+<meta property="og:url" content="http://localhost:4000/http-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C" />
+<meta property="og:site_name" content="futuremaker’s blog" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/http-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-06T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/http-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C" />
+<meta property="twitter:title" content="Http 프로토콜" />
+<meta name="twitter:site" content="@abhinav" />
+<meta name="twitter:creator" content="@Abhinav Saxena" />
+<script type="application/ld+json">
+{"headline":"Http 프로토콜","url":"http://localhost:4000/http-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C","datePublished":"2023-11-06T00:00:00+09:00","dateModified":"2023-11-06T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/http-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C"},"author":{"@type":"Person","name":"Abhinav Saxena"},"@type":"BlogPosting","description":"HTTP 프로토콜","@context":"https://schema.org"}</script>
+<script async defer data-soopr-token="pt_86c48a585d77ba8441f155e3e016788c" src="https://sdk.soopr.co/soopr.js"  ></script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="futuremaker&apos;s blog" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="post-wrapper" aria-label="Content">
+        
+        <div class="post-content">
+
+            <!-- content here -->
+            
+  <a href="/study">study</a>
+
+
+<h1 class="post-title">Http 프로토콜</h1>
+
+<aside class="sticky-sidebar">
+  <div class="toc-container">
+    
+    <div class="toc">
+
+        
+    
+    </div>
+</div>
+</aside>
+
+
+<p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">November 2023</span>
+  
+
+
+  
+  
+  (1454 Words, 
+  9 Minutes)
+  
+
+</p>
+
+<div class='soopr-btn'></div>
+
+
+
+  <div class="">
+    
+    <span class="tag">HTTP</span>
+    
+    <span class="tag">프로토콜</span>
+    
+    <span class="tag">메서드</span>
+    
+    <span class="tag">헤더</span>
+    
+    <span class="tag">stateless</span>
+    
+    <span class="tag">keep-alive</span>
+    
+    <span class="tag">파이프라이닝</span>
+    
+    <span class="tag">1.1/2/3</span>
+    
+    <span class="tag">study</span>
+    
+  </div>
+
+
+
+
+
+<h3 id="http-프로토콜">HTTP 프로토콜</h3>
+
+<p>HTTP는 OSI 7계층에서 7계층 애플리케이션 계층 프로토콜이다. 또한 HTTP HTML 문서와 같은 리소스들을 가져올 수 있도록 해주는 프로토콜이다. HTTP는 웹에서 이루어지는 모든 데이터 교환의 기초이며, 클라이언트-서버 프로토콜이기도 하다. 클라이언트-서버 프로토콜이란 수신자 측에 의해 요청이 초기화되는 프로토콜을 의미한다. 하나의 완전한 문서는 텍스트, 레이아웃 설명, 이미지, 비디오, 스크립트 등 불러온 하위문서를 재구성한다.</p>
+
+<p>클라이언트와 서버들은 개별적인 메시지 교환에 의해 통신한다. 보통 브라우저인 클라이언트에 의해 전송되는 메시지를 요청(Request)라고 부르며, 그에 대해 서버에서 응답으로 전송되는 메시지를 응답(Response)라고 부른다.</p>
+
+<p>출처 : <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Overview">https://developer.mozilla.org/ko/docs/Web/HTTP/Overview</a></p>
+
+<hr />
+
+<h3 id="http-요청응답-모델">HTTP 요청/응답 모델</h3>
+
+<p>HTTP는 메시지를 통해 요청과 응답을 한다. HTTP 메시지는 HTTP 애플리케이션 간에 주고받은 데이터의 블록이다. 요청은 클라이언트가 서버로 전달해서 서버의 액션이 일어나게끔 하는 메시지고, 응답은 요청에 대한 서버의 답변이다.</p>
+
+<p>메시지는 클라이언트, 서버, 프록시 사이를 흐른다. 메시지가 서버로 향하는것을 <code class="language-plaintext highlighter-rouge">인바운드</code>, 모든 처리가 끝난 뒤에 메시지가 사용자 에이전트로 돌아오는것은 <code class="language-plaintext highlighter-rouge">아웃바운드</code> 라고 한다.</p>
+
+<div>
+  <div style="display: flex;">
+      <div style="border: 1px solid black">
+        <img data-action="zoom" src="/assets/images/post/request.png" alt="absolute" width="400" />
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 5px; justify-content: center; margin-left: 8px;">
+        <div style="font-size: 1rem; margin-left: 10px; font-weight: bold">요청</div>
+        <div style="font-size: 0.8rem">- Method: 클라이언트가 수행하고자 하는 동작을 정의</div>
+        <div style="font-size: 0.8rem">- Method: 클라이언트가 수행하고자 하는 동작을 정의</div>
+        <div style="font-size: 0.8rem">- Path: 가져오려는 리소스의 경로</div>
+        <div style="font-size: 0.8rem">- Protocal: HTTP 프로토콜 버전</div>
+        <div style="font-size: 0.8rem">- Header: 서버에 대한 추가 정보를 전달</div>
+      </div>
+
+  </div>
+  <br />
+  <div style="display: flex;">
+      <div style="border: 1px solid black">
+        <img data-action="zoom" src="/assets/images/post/response.png" alt="absolute" width="400" />
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 5px; justify-content: center; margin-left: 8px">
+        <div style="font-size: 1rem; margin-left: 10px; font-weight: bold">응답</div>
+        <div style="font-size: 0.8rem">- Protocal: HTTP 프로토콜 버전</div>
+        <div style="font-size: 0.8rem">- 상태코드: 요청의 성공 여부와 이유를 나타냄</div>
+        <div style="font-size: 0.8rem">- 상태 메시지: 상태코드 설명</div>
+        <div style="font-size: 0.8rem">- Header: 서버에서 전송되는 header</div>
+      </div>
+  </div>
+</div>
+<p>출처</p>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Messages">https://developer.mozilla.org/ko/docs/Web/HTTP/Messages</a></li>
+  <li>HTTP 완벽가이드</li>
+</ul>
+
+<hr />
+
+<h3 id="http-메서드">HTTP 메서드</h3>
+
+<p>요청의 시작줄은 메서드로 시작하며, 서버에게 무엇을 해야하는지 말해준다. HTTP 명세는 공동 요청 메서드의 집합을 정의한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>메서드</th>
+      <th>설명</th>
+      <th>메시지 본문 유무</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GET</td>
+      <td>서버에서 어떤 문서를 가져온다</td>
+      <td>없음</td>
+    </tr>
+    <tr>
+      <td>HEAD</td>
+      <td>서버에서 어떤 문서에 대한 헤더만 가져온다.</td>
+      <td>없음</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>서버가 처리해야 할 데이터를 보낸다.</td>
+      <td>있음</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>서버에 요청 메시지의 본문을 저장한다.</td>
+      <td>있음</td>
+    </tr>
+    <tr>
+      <td>TRACE</td>
+      <td>메시지가 프록시를 거쳐 서버에 도달하는 과정을 추적한다.</td>
+      <td>없음</td>
+    </tr>
+    <tr>
+      <td>OPTIONS</td>
+      <td>서버가 어떤 메서드를 수행할 수 있는지 확인한다.</td>
+      <td>없음</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>서버에서 문서를 제거한다.</td>
+      <td>없음</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="http-메서드-중-get과-post의-차이점">HTTP 메서드 중 GET과 POST의 차이점</h3>
+
+<p>GET</p>
+
+<ul>
+  <li>서버에게 리소스를 요청하기 위해 쓰인다.</li>
+  <li>요청 시, URL 주소에 파라미터를 포함하여 전송하며 이부분을 쿼리 스트링이라고 한다.</li>
+  <li>요청 성공시 200 상태코드를 나타내며, XML, JSON 외에 여러 데이터(HTML, TEXT 등) 형식의 데이터와 함께 반환한다.</li>
+  <li>캐시 됨</li>
+  <li>브라우저 기록에 남는다.</li>
+  <li>북마크에 추가할 수 있다.</li>
+  <li>데이터의 길이가 제한된다.</li>
+  <li>멱등성을 가진다. (연산을 여러 번 적용하더라도 결과가 달라지지 않는 성질)</li>
+</ul>
+
+<p>POST</p>
+
+<ul>
+  <li>데이터를 생성 및 추가하기 위해 사용</li>
+  <li>요청 시, 전송할 데이터는 HTTP 메시지의 Body에 담아서 전송한다.</li>
+  <li>요청 성공시 201(created) 상태코드를 보낸다.</li>
+  <li>캐시 안됨</li>
+  <li>브라우저 기록에 남지 않음</li>
+  <li>북마크에 추가할 수 없음</li>
+  <li>데이터 길이에 대한 제한이 없음</li>
+  <li>멱등성을 가지지 않는다.</li>
+</ul>
+
+<p>출처 : <a href="https://velog.io/@songyouhyun/Get%EA%B3%BC-Post%EC%9D%98-%EC%B0%A8%EC%9D%B4%EB%A5%BC-%EC%95%84%EC%8B%9C%EB%82%98%EC%9A%94">https://velog.io/@songyouhyun/Get%EA%B3%BC-Post%EC%9D%98-%EC%B0%A8%EC%9D%B4%EB%A5%BC-%EC%95%84%EC%8B%9C%EB%82%98%EC%9A%94</a></p>
+
+<hr />
+
+<h3 id="http-put-patch의-차이">HTTP PUT, PATCH의 차이</h3>
+
+<p>PUT</p>
+
+<ul>
+  <li>HTTP PUT 메서드는 요청 페이로드를 사용해 새로운 리소스를 생성하거나, 대상 리소스를 나타내는 데이터를 대체한다.</li>
+</ul>
+
+<p>PUTCH</p>
+
+<ul>
+  <li>HTTP PATCH 메소드는 리소스의 부분적이 수정을 할 때에 사용한다.</li>
+</ul>
+
+<hr />
+
+<h3 id="http-상태코드란-상태코드-종류">HTTP 상태코드란, 상태코드 종류</h3>
+
+<ul>
+  <li>클라이언트가 서버를 향해 리퀘스트를 보낼 때 서버에서 그 결과가 어떻게 되었는지 알려주는 역할을 한다.</li>
+  <li>응답은 5개의 그룹으로 나뉘어진다.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>클래스</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1xx</td>
+      <td>Informational</td>
+      <td>리퀘스트를 받아들여 처리중</td>
+    </tr>
+    <tr>
+      <td>2xx</td>
+      <td>Success</td>
+      <td>리퀘스트를 정상적으로 처리했음</td>
+    </tr>
+    <tr>
+      <td>3xx</td>
+      <td>Redirection</td>
+      <td>리퀘스트를 완료하기 위해서 추가 동작이 필요</td>
+    </tr>
+    <tr>
+      <td>4xx</td>
+      <td>Client Error</td>
+      <td>서버는 리퀘스트 이해 불가능</td>
+    </tr>
+    <tr>
+      <td>5xx</td>
+      <td>Server Error</td>
+      <td>서버는 리퀘스트 처리 실패</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>상태 코드</th>
+      <th>상태 메시지</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2xx</td>
+      <td>200</td>
+      <td>OK</td>
+      <td>서버가 요청을 처리함</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>201</td>
+      <td>Created</td>
+      <td>성공적으로 요청되어 서버가 새 리소스를 작성</td>
+    </tr>
+    <tr>
+      <td>3xx</td>
+      <td>302</td>
+      <td>Found</td>
+      <td>요청한 리소스의 URI가 일시적으로 변경되었음을 의미함. 새롭개 변경된 URI는 나중에 만들어 질수 있음</td>
+    </tr>
+    <tr>
+      <td>4xx</td>
+      <td>400</td>
+      <td>Bad Request</td>
+      <td>서버가 요청 구문을 인식하지 못함</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>403</td>
+      <td>Forbidden</td>
+      <td>클라이언가 콘텐츠에 접근할 권리를 가지고 있지 않으며, 이에 서버가 요청을 거부</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>404</td>
+      <td>Not Found</td>
+      <td>서버가 요청한 페이지를 찾을 수 없다, 서버에 존재하지 않는 페이지를 찾을시 나타남</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>405</td>
+      <td>Mathod not Allowed</td>
+      <td>요청에 지정된 방법을 사용할 수 없다. POST 방식으로 정의된 요청을 GET 요청으로 보냈을 시</td>
+    </tr>
+    <tr>
+      <td>5xx</td>
+      <td>500</td>
+      <td>Intenal Server Error</td>
+      <td>서버에 오류가 발생하여 요청을 수행 할 수 없음</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>400 : 서버가 클라이언트 오류를 감지해 요청을 처리할 수 없다는 의미 <br />
+404 : 서버가 요청받은 리소스를 찾을 수 없다는 것을 의미함</p>
+
+<p>출처</p>
+
+<ul>
+  <li><a href="https://ko.wikipedia.org/wiki/HTTP_%EC%83%81%ED%83%9C_%EC%BD%94%EB%93%9C">https://ko.wikipedia.org/wiki/HTTP<em>%EC%83%81%ED%83%9C</em>%EC%BD%94%EB%93%9C</a></li>
+  <li>그림으로 배우는 HTTP &amp; Network basic</li>
+</ul>
+
+<hr />
+
+<h3 id="http-헤더란-헤더의-종류">HTTP 헤더란, 헤더의 종류</h3>
+
+<p>HTTP 헤더는 클라이언트와 서버가 요청 또는 응답으로 부가적인 정보를 전송할 수 있도록 도와준다.</p>
+
+<p>HTTP 프로토콜의 리퀘스트와 리스폰스에는 반드시 메시지 헤더를 포함하며 이 메시지 헤더에는 클라이언트나 서버가 리퀘스트나 리스폰스를 처리하기 위한 정보를 담는다.
+HTTP 헤더는 대소문자를 구분하지 않으며, 이름과 콜론 다음에 오는 값으로 이루어져있다. 값 앞에 붙은 문자열은 무시된다.</p>
+
+<h4 id="request-header">Request Header</h4>
+
+<p>요청 헤더는 서버가 응답을 맞춤화 할 수 있도록 요청 컨텍스트에 대한 정보를 제공하기 위해 HTTP 요청에서 사용할 수 있는 헤더이다.</p>
+
+<ul>
+  <li>메시지 헤더
+    <ul>
+      <li>메소드, URI, HTTP 버전
+        <ul>
+          <li>리퀘스트 라인</li>
+        </ul>
+      </li>
+      <li>HTTP 헤더 필드
+        <ul>
+          <li>리퀘스트 헤더 필드</li>
+          <li>일반 헤더 필드</li>
+          <li>엔티티 헤더 필드</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>개행 문자 (CR + LF)</li>
+  <li>메시지 바디</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">GET /home.html HTTP/1.1</span>
+<span class="na">Host</span><span class="pi">:</span> <span class="s">developer.mozilla.org</span>
+<span class="na">User-Agent</span><span class="pi">:</span> <span class="s">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0</span>
+<span class="na">Accept</span><span class="pi">:</span> <span class="s">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span>
+<span class="na">Accept-Language</span><span class="pi">:</span> <span class="s">en-US,en;q=0.5</span>
+<span class="na">Accept-Encoding</span><span class="pi">:</span> <span class="s">gzip, deflate, br</span>
+<span class="na">Referer</span><span class="pi">:</span> <span class="s">https://developer.mozilla.org/testpage.html</span>
+<span class="na">Connection</span><span class="pi">:</span> <span class="s">keep-alive</span>
+<span class="na">Upgrade-Insecure-Requests</span><span class="pi">:</span> <span class="m">1</span>
+<span class="na">If-Modified-Since</span><span class="pi">:</span> <span class="s">Mon, 18 Jul 2016 02:36:04 GMT</span>
+<span class="na">If-None-Match</span><span class="pi">:</span> <span class="s2">"</span><span class="s">c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"</span>
+<span class="na">Cache-Control</span><span class="pi">:</span> <span class="s">max-age=0</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>헤더 필드명</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Accept</td>
+      <td>유저 에이전트가 처리 가능한 미디어 타입</td>
+    </tr>
+    <tr>
+      <td>Host</td>
+      <td>요구된 리소스의 호스트</td>
+    </tr>
+    <tr>
+      <td>Authorization</td>
+      <td>웹 인증을 위한 정보</td>
+    </tr>
+    <tr>
+      <td>User-Agent</td>
+      <td>HTTP 클라이언트의 정보</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="reponse-header">Reponse Header</h4>
+
+<p>위치 또는 서버 자체에 대한 정보(이름, 버전)과 같이 응답에 대한 부가적인 정보를 갖는 헤더이다.</p>
+
+<ul>
+  <li>메시지 헤더
+    <ul>
+      <li>HTTP 버전, 상태 코드
+        <ul>
+          <li>상태라인</li>
+        </ul>
+      </li>
+      <li>HTTP 헤더 필드
+        <ul>
+          <li>리스폰스 헤더 필드</li>
+          <li>일반 헤더 필드</li>
+          <li>엔티티 헤더 필드</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>개행 문자</li>
+  <li>메시지 바디</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">200 OK</span>
+<span class="na">Access-Control-Allow-Origin</span><span class="pi">:</span> <span class="err">*</span>
+<span class="na">Connection</span><span class="pi">:</span> <span class="s">Keep-Alive</span>
+<span class="na">Content-Encoding</span><span class="pi">:</span> <span class="s">gzip</span>
+<span class="na">Content-Type</span><span class="pi">:</span> <span class="s">text/html; charset=utf-8</span>                            <span class="c1"># 오브젝트의 타입</span>
+<span class="na">Date</span><span class="pi">:</span> <span class="s">Mon, 18 Jul 2016 16:06:00 GMT</span>
+<span class="na">Etag</span><span class="pi">:</span> <span class="s2">"</span><span class="s">c561c68d0ba92bbeb8b0f612a9199f722e3a621a"</span>
+<span class="na">Keep-Alive</span><span class="pi">:</span> <span class="s">timeout=5, max=997</span>
+<span class="na">Last-Modified</span><span class="pi">:</span> <span class="s">Mon, 18 Jul 2016 02:36:04 GMT</span>
+<span class="na">Server</span><span class="pi">:</span> <span class="s">Apache</span>
+<span class="na">Set-Cookie</span><span class="pi">:</span> <span class="s">mykey=myvalue; expires=Mon, 17-Jul-2017 16:06:00 GMT; Max-Age=31449600; Path=/; secure</span>
+<span class="na">Transfer-Encoding</span><span class="pi">:</span> <span class="s">chunked</span>
+<span class="na">Vary</span><span class="pi">:</span> <span class="s">Cookie, Accept-Encoding</span>
+<span class="na">X-Backend-Server</span><span class="pi">:</span> <span class="s">developer2.webapp.scl3.mozilla.com</span>
+<span class="na">X-Cache-Info</span><span class="pi">:</span> <span class="s">not cacheable; meta data too large</span>
+<span class="na">X-kuma-revision</span><span class="pi">:</span> <span class="m">1085259</span>
+<span class="na">x-frame-options</span><span class="pi">:</span> <span class="s">DENY</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>헤더 필드명</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Accept-Ranges</td>
+      <td>바이트 단위의 요구를 수신할 수 있는지 없는지 여부</td>
+    </tr>
+    <tr>
+      <td>Location</td>
+      <td>클라이언트를 지정한 URL 에 리다이렉트</td>
+    </tr>
+    <tr>
+      <td>Server</td>
+      <td>HTTP 서버 정보</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>출처</p>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers">https://developer.mozilla.org/ko/docs/Web/HTTP/Headers</a></li>
+  <li>그림으로 배우는 HTTP &amp; Network basic</li>
+</ul>
+
+<hr />
+
+<h3 id="http-무상태성">HTTP 무상태성</h3>
+
+<p>HTTP는 요청과 응답과정에서 상태를 관리하지 않는다. 이러한 이유로 많은 데이터를 매우 빠르고 확실하게 처리하는 범위성 확보가 가능하다. 또한 응답 서버를 쉽게 바꿀수 있기 때문에 무한한 서버 증설이 가능하다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">무상태성</code>으로 인해 클라이언트를 식별할 수 없어 <code class="language-plaintext highlighter-rouge">쿠키</code>, <code class="language-plaintext highlighter-rouge">세션</code>, <code class="language-plaintext highlighter-rouge">토큰</code> 방식으로 클라이언트와의 상태를 기억한다.</p>
+
+<p>출처 : <a href="https://velog.io/@rmaomina/network-http">https://velog.io/@rmaomina/network-http</a></p>
+
+<hr />
+
+<h3 id="http-keep-alive">HTTP Keep-Alive</h3>
+
+<p><code class="language-plaintext highlighter-rouge">비연결성</code>은 클라이언트와 서버가 한 번 연결을 맺은 후, 클라이언트 요청에 대해 서버가 응답을 마치면 맺었던 연결을 끊어 버리는 성질을 말한다.</p>
+
+<p>장점</p>
+
+<p>서버가 다수의 클라이언트와 연결을 계속 유지해야 한다면, 많은 리소스가 낭비된다. 연결을 유지하기 위한 리소스를 줄이면 더 많은 연결을 할 수 있다.</p>
+
+<p>단점</p>
+
+<p>웹 브라우저로 사이트를 요청하면 HTML 뿐만 아니라 자바스크립트, css 등의 자원을 받는데, 해당 자원들을 각각 보낼때마다 연결을 끊고 다시 맺는것을 반복하면 비효율적이다.</p>
+
+<p>TCP 커넥션의 연결과 종료로 반복되는 오버헤드를 줄이기 위해 HTTP의 <code class="language-plaintext highlighter-rouge">Keep-Alive</code> 속성을 사용할 수 있다. <code class="language-plaintext highlighter-rouge">Keep-Alive</code>는 지정된 시간동안 서버와 클라이언트 사이에서 패킷 교환이 없을 경우, 연결을 지속하기 위해 패킷을 주기적으로 보내는 것을 말한다. 이때 패킷에 반응이 없으면 접속을 끊게 된다.</p>
+
+<p>출처</p>
+
+<ul>
+  <li><a href="https://victorydntmd.tistory.com/286">https://victorydntmd.tistory.com/286</a></li>
+  <li>그림으로 배우는 HTTP &amp; Network basic</li>
+</ul>
+
+<hr />
+
+<h3 id="http-파이프라이닝">HTTP 파이프라이닝</h3>
+
+<p>지속 연결 (Keep-Alive)은 여려 리퀘스트를 보낼수 있도록 파이프라인화를 가능하게 한다. 파이프라인에 의해 응답을 기다린뒤에 요청을 발행했던것을, 응답을 기다리지 않고 바로 다음 요청을 보낼 수 있다. 이로인해 여러 리퀘스트를 병행해서 보내는 것이 가능하기 때문에 일일이 리스폰스를 기다릴 필요가 없다.</p>
+
+<p>ex) 한 페이지에 10개의 이미지를 포함한 웹 페이지 요청시 개별로 보내는 요청보다 지속연결이 빠르며, 파이프라인이 보다 빠르다.</p>
+
+<hr />
+
+<h3 id="http11-http2-http3-의-특징들">HTTP/1.1, HTTP/2, HTTP/3 의 특징들</h3>
+
+<h4 id="11">1.1</h4>
+
+<ul>
+  <li>HTTP의 첫 번째 공식 표준 버전. GET, POST 외에도 PUT과 DELETE 추가됨, 또한 TCP 연결을 재사용해 많은 콘텐츠를 전달할수 있는 Keep-alive, 파이프라이닝 추가</li>
+</ul>
+
+<h4 id="20">2.0</h4>
+
+<ul>
+  <li>요청과 응답이 길이가 정의된 한개 이상의 프레임에 담겨 스트림을 통해 보내진다. 하나의 커넥션 위에 여러개의 스트림(한쌍의 응답과 요청 처리)이 동시에 만들어 질 수 있어, 여러 요청과 응답을 처리하는 것이 가능하다.</li>
+  <li>스트림은 우선순위를 가질수 있다.</li>
+  <li>헤더 압축
+    <ul>
+      <li>HTTP 헤더를 압축하여 전송한다. 중복되는 헤더 값들을 테이블에 저장하고 참고하는 방식으로 중복 전달을 제거한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>서버 푸시</p>
+
+    <ul>
+      <li>서버가 하나의 요청에 여러개의 리소스를 보낼 수 있도록 해준다. 서버가 클라이언트에서 어떤 리소스를 요구할 것인지 미리 알 수 있는 상황에서 유리하다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="30">3.0</h4>
+
+<ul>
+  <li>구글에서 개발한 <code class="language-plaintext highlighter-rouge">QUIC</code></li>
+  <li>UDP를 채택해 TCP의 성능을 개선하는 기술이다.</li>
+  <li>전달 속도의 향상과 더불어 클라이언트와 서버 연결 수를 최소화하고 대역폭을 예상해 패킷 혼잡을 피하는 것이 특징</li>
+</ul>
+
+<p>출처 : <a href="https://github.com/dongkyun-dev/TIL/blob/master/web/HTTP1.1%EA%B3%BC%20HTTP2.0%2C%20%EA%B7%B8%EB%A6%AC%EA%B3%A0%20%EA%B0%84%EB%8B%A8%ED%95%9C%20HTTP3.0.md">https://github.com/dongkyun-dev/TIL/blob/master/web/HTTP1.1%EA%B3%BC%20HTTP2.0%2C%20%EA%B7%B8%EB%A6%AC%EA%B3%A0%20%EA%B0%84%EB%8B%A8%ED%95%9C%20HTTP3.0.md</a></p>
+
+
+
+<hr>
+
+<div id="disqus_thread"></div>
+
+
+  <div class="credits">&copy;&nbsp;2025&nbsp;Abhinav Saxena
+    &nbsp;
+    •
+    &nbsp;Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+    &nbsp;
+    •
+    &nbsp;Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+  </div>
+
+
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  
+  var disqus_config = function () {
+  this.page.url = 'https://futuremaker019.github.io/http-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C';  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/HTTP 프로토콜'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-futuremaker019-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+        </div>
+
+      
+
+    </main>
+
+     <!-- dark, light  -->
+    
+        <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+    <script async defer src="https://sdk.soopr.co/soopr.js"></script></body>
+</html>

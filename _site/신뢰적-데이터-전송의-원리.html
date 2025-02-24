@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      신뢰적 데이터 전송의 원리
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.7.3 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="신뢰적 데이터 전송의 원리" />
+<meta name="author" content="Abhinav Saxena" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="슬라이딩 윈도우" />
+<meta property="og:description" content="슬라이딩 윈도우" />
+<link rel="canonical" href="http://localhost:4000/%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC" />
+<meta property="og:url" content="http://localhost:4000/%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC" />
+<meta property="og:site_name" content="futuremaker’s blog" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-18T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC" />
+<meta property="twitter:title" content="신뢰적 데이터 전송의 원리" />
+<meta name="twitter:site" content="@abhinav" />
+<meta name="twitter:creator" content="@Abhinav Saxena" />
+<script type="application/ld+json">
+{"headline":"신뢰적 데이터 전송의 원리","url":"http://localhost:4000/%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC","datePublished":"2023-11-18T00:00:00+09:00","dateModified":"2023-11-18T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC"},"author":{"@type":"Person","name":"Abhinav Saxena"},"@type":"BlogPosting","description":"슬라이딩 윈도우","@context":"https://schema.org"}</script>
+<script async defer data-soopr-token="pt_86c48a585d77ba8441f155e3e016788c" src="https://sdk.soopr.co/soopr.js"  ></script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="futuremaker&apos;s blog" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="post-wrapper" aria-label="Content">
+        
+        <div class="post-content">
+
+            <!-- content here -->
+            
+  <a href="/study">study</a>
+
+
+<h1 class="post-title">신뢰적 데이터 전송의 원리</h1>
+
+<aside class="sticky-sidebar">
+  <div class="toc-container">
+    
+    <div class="toc">
+
+        
+    
+    </div>
+</div>
+</aside>
+
+
+<p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">November 2023</span>
+  
+
+
+  
+  
+  (23 Words, 
+  1 Minutes)
+  
+
+</p>
+
+<div class='soopr-btn'></div>
+
+
+
+  <div class="">
+    
+    <span class="tag">신뢰적 데이터 전송</span>
+    
+    <span class="tag">study</span>
+    
+  </div>
+
+
+
+
+
+<h3 id="슬라이딩-윈도우">슬라이딩 윈도우</h3>
+
+<p>슬라이딩 윈도우는 두개의 네트워크 호스트간의 패킷의 흐름을 제어하기 위한 방법이다.</p>
+
+<p>TCP와 같이 데이터의 전달을 보증하는 프로토콜에서는 패킷 하나하나를 정상적으로 전달되었음을 알리는 확인 신호(ACK)를 받아야하며, 만약 패킷이 중도에 잘못되었거나 분실되어 확인받지 못하는 경우, 해당 패킷을 재전송해야하는 필요가 있다. 슬라이딩 윈도는 일단 ‘윈도(메모리 버퍼의 일정 영역)’에 포함되는 모든 패킷을 전송하고, 그 패킷들의 전달이 확인되는대로 이 윈도를 옆으로 옮김으로서 그 다음 패킷들을 전송하는 방식이다.</p>
+
+<p>슬라이딩 윈도는 아직 확인을 받지 않고도 여러 패킷을 보내는 것을 가능케 하기 때문에, 매번 전송한 패킷에 대한 확인을 받아야만 그 다음 패킷을 전송하는 방법(stop-and-wait)을 사용하는 것보다 훨씬 네트워크를 효율적으로 사용할 수 있다.</p>
+
+<p>출처 : <a href="https://ko.wikipedia.org/wiki/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%94%A9_%EC%9C%88%EB%8F%84">https://ko.wikipedia.org/wiki/슬라이딩_윈도우</a></p>
+
+<h3 id="go-back-n">Go Back N</h3>
+
+<p><img data-action="zoom" src="/assets/images/post/GBN.png" alt="absolute" width="500" /></p>
+
+<p>슬라이딩 윈도우 기반의 에러 제어 방식이다. 전송 측에서는 N갱의 프레임을 연속적으로 보낼 수 있지만, 수신 측에서는 오직 순서대로 만 프레임을 수신받을 수 있다. 만약 준간에 하나라도 프레임이 손실되면, 그 이후의 프레임들을 모두 무시되고, 전송 측에서는 손실된 프레임부터 다시 전송하게 된다.</p>
+
+<p>출처 : <a href="https://gsbang.tistory.com/entry/Network-Go-Back-N-Automatic-Repeat-reQuest-ARQ">https://gsbang.tistory.com/entry/Network-Go-Back-N-Automatic-Repeat-reQuest-ARQ</a></p>
+
+<h3 id="selective-repeat">Selective Repeat</h3>
+
+<p>Selective Repeat (SR)는 ARQ (Automatic Repeat reQuest) 프로토콜의 한 종류로, 전송 중인 데이터 패킷 중 에러가 발생한 패킷만 재전송하는 방식을 채택하였습니다. 이는 Go-Back-N 방식과는 다르게, 잘못된 패킷만 선택적으로 다시 보내는 방법입니다. 그래서 SR ARQ 방식은 별도의 데이터 재정렬을 수행해야 하며, 이러한 이유로 별도의 버퍼를 필요로 한다.</p>
+
+
+
+<hr>
+
+<div id="disqus_thread"></div>
+
+
+  <div class="credits">&copy;&nbsp;2025&nbsp;Abhinav Saxena
+    &nbsp;
+    •
+    &nbsp;Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+    &nbsp;
+    •
+    &nbsp;Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+  </div>
+
+
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  
+  var disqus_config = function () {
+  this.page.url = 'https://futuremaker019.github.io/%EC%8B%A0%EB%A2%B0%EC%A0%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%86%A1%EC%9D%98-%EC%9B%90%EB%A6%AC';  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/신뢰적 데이터 전송의 원리'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-futuremaker019-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+        </div>
+
+      
+
+    </main>
+
+     <!-- dark, light  -->
+    
+        <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+    <script async defer src="https://sdk.soopr.co/soopr.js"></script></body>
+</html>

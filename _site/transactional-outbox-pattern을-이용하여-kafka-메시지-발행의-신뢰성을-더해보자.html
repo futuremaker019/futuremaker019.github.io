@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      Transactional outbox pattern을 이용하여 kafka 메시지 발행의 신뢰성을 더해보자
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.7.3 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Transactional outbox pattern을 이용하여 kafka 메시지 발행의 신뢰성을 더해보자" />
+<meta name="author" content="Abhinav Saxena" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Kafka를 이용한 책임분리 및 Transactional Outbox Pattern 구현" />
+<meta property="og:description" content="Kafka를 이용한 책임분리 및 Transactional Outbox Pattern 구현" />
+<link rel="canonical" href="http://localhost:4000/transactional-outbox-pattern%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-kafka-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B0%9C%ED%96%89%EC%9D%98-%EC%8B%A0%EB%A2%B0%EC%84%B1%EC%9D%84-%EB%8D%94%ED%95%B4%EB%B3%B4%EC%9E%90" />
+<meta property="og:url" content="http://localhost:4000/transactional-outbox-pattern%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-kafka-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B0%9C%ED%96%89%EC%9D%98-%EC%8B%A0%EB%A2%B0%EC%84%B1%EC%9D%84-%EB%8D%94%ED%95%B4%EB%B3%B4%EC%9E%90" />
+<meta property="og:site_name" content="futuremaker’s blog" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/transactional-outbox-pattern%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-kafka-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B0%9C%ED%96%89%EC%9D%98-%EC%8B%A0%EB%A2%B0%EC%84%B1%EC%9D%84-%EB%8D%94%ED%95%B4%EB%B3%B4%EC%9E%90" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-09-01T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/transactional-outbox-pattern%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-kafka-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B0%9C%ED%96%89%EC%9D%98-%EC%8B%A0%EB%A2%B0%EC%84%B1%EC%9D%84-%EB%8D%94%ED%95%B4%EB%B3%B4%EC%9E%90" />
+<meta property="twitter:title" content="Transactional outbox pattern을 이용하여 kafka 메시지 발행의 신뢰성을 더해보자" />
+<meta name="twitter:site" content="@abhinav" />
+<meta name="twitter:creator" content="@Abhinav Saxena" />
+<script type="application/ld+json">
+{"headline":"Transactional outbox pattern을 이용하여 kafka 메시지 발행의 신뢰성을 더해보자","url":"http://localhost:4000/transactional-outbox-pattern%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-kafka-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B0%9C%ED%96%89%EC%9D%98-%EC%8B%A0%EB%A2%B0%EC%84%B1%EC%9D%84-%EB%8D%94%ED%95%B4%EB%B3%B4%EC%9E%90","datePublished":"2023-09-01T00:00:00+09:00","dateModified":"2023-09-01T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/transactional-outbox-pattern%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-kafka-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B0%9C%ED%96%89%EC%9D%98-%EC%8B%A0%EB%A2%B0%EC%84%B1%EC%9D%84-%EB%8D%94%ED%95%B4%EB%B3%B4%EC%9E%90"},"author":{"@type":"Person","name":"Abhinav Saxena"},"@type":"BlogPosting","description":"Kafka를 이용한 책임분리 및 Transactional Outbox Pattern 구현","@context":"https://schema.org"}</script>
+<script async defer data-soopr-token="pt_86c48a585d77ba8441f155e3e016788c" src="https://sdk.soopr.co/soopr.js"  ></script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="futuremaker&apos;s blog" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="post-wrapper" aria-label="Content">
+        
+        <div class="post-content">
+
+            <!-- content here -->
+            
+  <a href="/blog">blog</a>
+
+
+<h1 class="post-title">Transactional outbox pattern을 이용하여 kafka 메시지 발행의 신뢰성을 더해보자</h1>
+
+<aside class="sticky-sidebar">
+  <div class="toc-container">
+    
+    <div class="toc">
+
+        <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#kafka를-이용한-책임분리-및-transactional-outbox-pattern-구현">Kafka를 이용한 책임분리 및 Transactional Outbox Pattern 구현</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#transactional-outbox-pattern-이란">Transactional Outbox pattern 이란</a></li>
+<li class="toc-entry toc-h3"><a href="#프로젝트-아키텍처">프로젝트 아키텍처</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#결론">결론</a></li>
+</ul>
+    
+    </div>
+</div>
+</aside>
+
+
+<p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">September 2023</span>
+  
+
+
+  
+  
+  (993 Words, 
+  6 Minutes)
+  
+
+</p>
+
+<div class='soopr-btn'></div>
+
+
+
+  <div class="">
+    
+    <span class="tag">Kafka</span>
+    
+    <span class="tag">Infra</span>
+    
+    <span class="tag">blog</span>
+    
+  </div>
+
+
+
+
+
+<h2 id="kafka를-이용한-책임분리-및-transactional-outbox-pattern-구현">Kafka를 이용한 책임분리 및 Transactional Outbox Pattern 구현</h2>
+
+<h3 id="transactional-outbox-pattern-이란">Transactional Outbox pattern 이란</h3>
+
+<ul>
+  <li>Outbox는 <code class="language-plaintext highlighter-rouge">보낸 편지함</code>  을 뜻하며, 발생된 message 를 <code class="language-plaintext highlighter-rouge">Message Broker</code>로 발행되었는지를 확인하여 신뢰성을 보장해주는 패턴이다.</li>
+  <li>이러한 패턴은 왜 필요한가
+    <ul>
+      <li>트랜잭션이 커밋된 이 후 카프카 등의 <code class="language-plaintext highlighter-rouge">Message Broker</code>에서 메시지 발행이 되지 않았다면 반드시 처리되야 하는 메시지는 소실 될 것이다.</li>
+      <li>또한 DB 트랜잭션은 데이터 베이스 차원의 원자성을 보장하지만 비동기로 이루어지는 <code class="language-plaintext highlighter-rouge">Event Driven Architecture</code> 시스템에서는 메시지 발행의 유무는 <code class="language-plaintext highlighter-rouge">Consumer</code>를 통해 메시지를 직접 확인하지 않는다면 메시지 유실 유무를 확인할 수 없다.</li>
+    </ul>
+  </li>
+  <li>위와 같은 이유로 도메인 로직의 성공 시, 발행되는 메시지를 <code class="language-plaintext highlighter-rouge">outbox table</code> 이라는 별도의 테이블에 저장하여 함께 커밋한다. 미발행된 메시지를 outbox table에서 확인하여 배치 시스템등으로 재발행을 유도한다.</li>
+</ul>
+
+<h3 id="프로젝트-아키텍처">프로젝트 아키텍처</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── application/
+│   └── event/
+│       └── payment/
+│           └── PaymentEventListener
+├── domain/
+│   ├── common/
+│   │   ├── dataplatform/
+│   │   │   └── DataPlatformClient          (interface)
+│   │   ├── notification/
+│   │   │   ├── Notification
+│   │   │   └── NotificationSender          (interface)
+│   │   └── outbox/
+│   │       ├── Outbox
+│   │       ├── OutboxMessageWriter         (interface)
+│   │       └── OutboxRepository            (interface)
+│   └── payment/
+│       ├── event/
+│       │   ├── PaymentEvent
+│       │   └── PaymentEventPublisher       (interface)
+│       └── message/
+│           ├── PaymentMessage
+│           └── PaymentMessageSender        (interface)
+├── infrastructures/
+│   ├── kafka/
+│   │   ├── KafkaMessage
+│   │   ├── payment/
+│   │   │   └── PaymentKafkaMessageSender   (PaymentMessageSender 구현체)
+│   │   └── notification/
+│   │       └── SlackNotificationSender     (NotificationSener 구현체)
+│   └── spring/
+│       └── payment/
+│           └── PaymentSpringEventPublisher (PaymentEventPublisher 구현체)
+├── interfaces/
+│   └── consumer/
+│       └── payment/
+│           └── PaymentMessageConsumer
+└── support/
+    └── KafkaConfig
+</code></pre></div></div>
+
+<ul>
+  <li>Layered Architecture 를 구성하여 각 계층별로 Kafka의 메시지 pulisher와 consumer를 적절히 위치 시켰으며, 도메인에 <code class="language-plaintext highlighter-rouge">PaymentMessageSender</code> interface를 생성하여 DIP(Dependency Inversion Principle)을 만족할 수 있는 형태로 구성하였다.</li>
+  <li>또한 <code class="language-plaintext highlighter-rouge">PaymentEventListener</code> 에서는 Spring 에서 제공하는 Application Event를 이용하여 도메인 로직이 commit 된 후, message 를 발행할 수 있도록 하여 트랜잭션이 완료되지 않거나 롤백되는 경우 이벤트가 실행되지 않으므로 데이터의 일관성을 보장할 수 있도록 하였다.</li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+  <li>PaymentEventListener</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PaymentEventListener</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">OutboxRepository</span> <span class="n">outboxRepository</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">PaymentMessageSender</span> <span class="n">paymentMessageSender</span><span class="o">;</span>
+
+    <span class="nd">@TransactionalEventListener</span><span class="o">(</span><span class="n">phase</span> <span class="o">=</span> <span class="nc">TransactionPhase</span><span class="o">.</span><span class="na">BEFORE_COMMIT</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveOutbox</span><span class="o">(</span><span class="nc">PaymentEvent</span><span class="o">.</span><span class="na">Send</span> <span class="n">send</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">OutboxStatement</span><span class="o">.</span><span class="na">Save</span> <span class="n">outbox</span> <span class="o">=</span>
+                <span class="nc">OutboxStatement</span><span class="o">.</span><span class="na">Save</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">send</span><span class="o">.</span><span class="na">outboxId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">send</span><span class="o">.</span><span class="na">paymentId</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+        <span class="n">outboxRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">outbox</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Async</span>
+    <span class="nd">@TransactionalEventListener</span><span class="o">(</span><span class="n">phase</span> <span class="o">=</span> <span class="nc">TransactionPhase</span><span class="o">.</span><span class="na">AFTER_COMMIT</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendMessage</span><span class="o">(</span><span class="nc">PaymentEvent</span><span class="o">.</span><span class="na">Send</span> <span class="n">send</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Send</span> <span class="n">paymentMessage</span> <span class="o">=</span> <span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Send</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">send</span><span class="o">.</span><span class="na">paymentId</span><span class="o">());</span>
+        <span class="nc">KafkaMessage</span><span class="o">&lt;</span><span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Send</span><span class="o">&gt;</span> <span class="n">message</span> <span class="o">=</span>
+                <span class="nc">KafkaMessage</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">send</span><span class="o">.</span><span class="na">outboxId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">paymentMessage</span><span class="o">);</span>
+        <span class="n">paymentMessageSender</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>saveOutbox
+    <ul>
+      <li>도메인 로직의 트랜잭션이 이루어질때, 전송될 메시지를 Outbox table에 저장하여 Outbox 패턴을 구성하기 위한 데이터를 적재한다.</li>
+    </ul>
+  </li>
+  <li>sendMessage
+    <ul>
+      <li>메시지를 발행하여 <code class="language-plaintext highlighter-rouge">Topic</code>에 전달한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+  <li>PaymentMessageConsumer</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<span class="nd">@Component</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PaymentMessageConsumer</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">DataPlatformClient</span> <span class="n">dataPlatformClient</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">NotificationSender</span> <span class="n">notificationSender</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">OutboxMessageWriter</span> <span class="n">outboxMessageWriter</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ObjectMapper</span> <span class="n">objectMapper</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * outbox 검증 로직
+     * */</span>
+    <span class="nd">@KafkaListener</span><span class="o">(</span><span class="n">topics</span> <span class="o">=</span> <span class="s">"${kafka.topic.name}"</span><span class="o">,</span> <span class="n">groupId</span> <span class="o">=</span> <span class="s">"group1"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">complete</span><span class="o">(</span><span class="nc">KafkaMessage</span><span class="o">&lt;?&gt;</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">outboxMessageWriter</span><span class="o">.</span><span class="na">complete</span><span class="o">(</span><span class="n">message</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * 데이터 플랫폼 호출 (외부 API)
+     * */</span>
+    <span class="nd">@KafkaListener</span><span class="o">(</span><span class="n">topics</span> <span class="o">=</span> <span class="s">"${kafka.topic.name}"</span><span class="o">,</span> <span class="n">groupId</span> <span class="o">=</span> <span class="s">"group2"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendData</span><span class="o">(</span><span class="nc">KafkaMessage</span><span class="o">&lt;?&gt;</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">LinkedHashMap</span><span class="o">&lt;?,</span> <span class="o">?&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="o">(</span><span class="nc">LinkedHashMap</span><span class="o">&lt;?,</span> <span class="o">?&gt;)</span> <span class="n">message</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+        <span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Get</span> <span class="n">get</span> <span class="o">=</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">convertValue</span><span class="o">(</span><span class="n">map</span><span class="o">,</span> <span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Get</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">callDataPlatform</span><span class="o">(</span><span class="n">get</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * slack 알림 연동
+     * */</span>
+    <span class="nd">@KafkaListener</span><span class="o">(</span><span class="n">topics</span> <span class="o">=</span> <span class="s">"${kafka.topic.name}"</span><span class="o">,</span> <span class="n">groupId</span> <span class="o">=</span> <span class="s">"group3"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendNotification</span><span class="o">(</span><span class="nc">KafkaMessage</span><span class="o">&lt;?&gt;</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">LinkedHashMap</span><span class="o">&lt;?,</span> <span class="o">?&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="o">(</span><span class="nc">LinkedHashMap</span><span class="o">&lt;?,</span> <span class="o">?&gt;)</span> <span class="n">message</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+        <span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Get</span> <span class="n">get</span> <span class="o">=</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">convertValue</span><span class="o">(</span><span class="n">map</span><span class="o">,</span> <span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Get</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">sendNotification</span><span class="o">(</span><span class="n">get</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>Topic에 전달된 메시지를 Consumer 를 이용하여 메시지가 성공적으로 생성된 것을 확인했다면 outbox table에 저장된 데이터의 상태값을 PUBLISHED 로 변경한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulerManager</span> <span class="o">{</span>
+
+    <span class="nd">@Scheduled</span><span class="o">(</span><span class="n">cron</span> <span class="o">=</span> <span class="s">"5 * * * * *"</span><span class="o">,</span> <span class="n">zone</span> <span class="o">=</span> <span class="s">"Asia/Seoul"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">resendMessage</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">outboxMessageWriter</span><span class="o">.</span><span class="na">resend</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="nd">@Component</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OutboxMessageWriterImpl</span> <span class="kd">implements</span> <span class="nc">OutboxMessageWriter</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="nd">@Transactional</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">complete</span><span class="o">(</span><span class="nc">String</span> <span class="n">outboxId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">outboxRepository</span><span class="o">.</span><span class="na">updateStatus</span><span class="o">(</span><span class="n">outboxId</span><span class="o">,</span> <span class="nc">OutboxType</span><span class="o">.</span><span class="na">PUBLISHED</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">resendPaymentMessage</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OutboxEntity</span><span class="o">&gt;</span> <span class="n">outboxes</span> <span class="o">=</span> <span class="n">outboxRepository</span><span class="o">.</span><span class="na">getOutboxByOutboxType</span><span class="o">(</span><span class="nc">OutboxType</span><span class="o">.</span><span class="na">INIT</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">outboxes</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">outboxes</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">outbox</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">outbox</span><span class="o">.</span><span class="na">getCreatedAt</span><span class="o">().</span><span class="na">plusMinutes</span><span class="o">(</span><span class="mi">5</span><span class="o">).</span><span class="na">isBefore</span><span class="o">(</span><span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">()))</span> <span class="o">{</span>
+                    <span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Send</span> <span class="n">paymentMessage</span> <span class="o">=</span>
+                            <span class="n">objectMapper</span><span class="o">.</span><span class="na">convertValue</span><span class="o">(</span><span class="n">outbox</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Send</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+                    <span class="nc">KafkaMessage</span><span class="o">&lt;</span><span class="nc">PaymentMessage</span><span class="o">.</span><span class="na">Send</span><span class="o">&gt;</span> <span class="n">message</span> <span class="o">=</span> <span class="nc">KafkaMessage</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">outbox</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="n">paymentMessage</span><span class="o">);</span>
+                    <span class="n">paymentMessageSender</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>상태값이 PUBLISHED 로 변경되지 못한 outbox table의 데이터를 유실된 메시지로 판단하여 스케줄러를 통해 일정시간의 간격으로 다시 발행하도록 한다</li>
+</ul>
+
+<h2 id="결론">결론</h2>
+
+<ul>
+  <li>Message Broker를 적용하여 메시지를 발행하고 소비하는 방식의 구성으로 시스템의 느슨한 결합을 유도하여, 구성의 변경 시 다른 로직에 영향을 미치지 않게 만들 수 있다.</li>
+  <li>이로 인하여 유연성 및 확장성이 증가한다.</li>
+  <li>또한 Transactional Outbox Pattern을 적용하여 메시지 발행에 대한 신뢰성 및 안정성을 유지할 수 있어 메시지 유실을 방지하여 데이터의 일관성을 유지할 수 있다.</li>
+</ul>
+
+
+
+<hr>
+
+<div id="disqus_thread"></div>
+
+
+  <div class="credits">&copy;&nbsp;2025&nbsp;Abhinav Saxena
+    &nbsp;
+    •
+    &nbsp;Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+    &nbsp;
+    •
+    &nbsp;Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+  </div>
+
+
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  
+  var disqus_config = function () {
+  this.page.url = 'https://futuremaker019.github.io/transactional-outbox-pattern%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-kafka-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B0%9C%ED%96%89%EC%9D%98-%EC%8B%A0%EB%A2%B0%EC%84%B1%EC%9D%84-%EB%8D%94%ED%95%B4%EB%B3%B4%EC%9E%90';  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/Transactional Outbox Pattern을 이용하여 Kafka 메시지 발행의 신뢰성을 더해보자'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-futuremaker019-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+        </div>
+
+      
+
+    </main>
+
+     <!-- dark, light  -->
+    
+        <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+    <script async defer src="https://sdk.soopr.co/soopr.js"></script></body>
+</html>

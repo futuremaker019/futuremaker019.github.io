@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      Redis를 이용한 대기열 구현
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.7.3 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Redis를 이용한 대기열 구현" />
+<meta name="author" content="Abhinav Saxena" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="목적" />
+<meta property="og:description" content="목적" />
+<link rel="canonical" href="http://localhost:4000/redis%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8C%80%EA%B8%B0%EC%97%B4-%EA%B5%AC%ED%98%84" />
+<meta property="og:url" content="http://localhost:4000/redis%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8C%80%EA%B8%B0%EC%97%B4-%EA%B5%AC%ED%98%84" />
+<meta property="og:site_name" content="futuremaker’s blog" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/redis%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8C%80%EA%B8%B0%EC%97%B4-%EA%B5%AC%ED%98%84" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-09-01T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="https://soopr.xyz/images/card?url=http://localhost:4000/redis%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8C%80%EA%B8%B0%EC%97%B4-%EA%B5%AC%ED%98%84" />
+<meta property="twitter:title" content="Redis를 이용한 대기열 구현" />
+<meta name="twitter:site" content="@abhinav" />
+<meta name="twitter:creator" content="@Abhinav Saxena" />
+<script type="application/ld+json">
+{"headline":"Redis를 이용한 대기열 구현","url":"http://localhost:4000/redis%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8C%80%EA%B8%B0%EC%97%B4-%EA%B5%AC%ED%98%84","datePublished":"2024-09-01T00:00:00+09:00","dateModified":"2024-09-01T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/redis%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8C%80%EA%B8%B0%EC%97%B4-%EA%B5%AC%ED%98%84"},"author":{"@type":"Person","name":"Abhinav Saxena"},"@type":"BlogPosting","description":"목적","@context":"https://schema.org"}</script>
+<script async defer data-soopr-token="pt_86c48a585d77ba8441f155e3e016788c" src="https://sdk.soopr.co/soopr.js"  ></script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="futuremaker&apos;s blog" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="post-wrapper" aria-label="Content">
+        
+        <div class="post-content">
+
+            <!-- content here -->
+            
+  <a href="/blog">blog</a>
+
+
+<h1 class="post-title">Redis를 이용한 대기열 구현</h1>
+
+<aside class="sticky-sidebar">
+  <div class="toc-container">
+    
+    <div class="toc">
+
+        <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#목적">목적</a></li>
+<li class="toc-entry toc-h2"><a href="#대기열-개발방식-고찰">대기열 개발방식 고찰</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#은행창구-방식">은행창구 방식</a></li>
+<li class="toc-entry toc-h3"><a href="#놀이공원-방식">놀이공원 방식</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#대기열-기능개발">대기열 기능개발</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#코드">코드</a></li>
+<li class="toc-entry toc-h3"><a href="#부하테스트">부하테스트</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#목적-1">목적</a></li>
+<li class="toc-entry toc-h4"><a href="#테스트-환경">테스트 환경</a></li>
+<li class="toc-entry toc-h4"><a href="#테스트-시나리오-및-결과">테스트 시나리오 및 결과</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+    
+    </div>
+</div>
+</aside>
+
+
+<p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">September 2024</span>
+  
+
+
+  
+  
+  (803 Words, 
+  5 Minutes)
+  
+
+</p>
+
+<div class='soopr-btn'></div>
+
+
+
+  <div class="">
+    
+    <span class="tag">redis</span>
+    
+    <span class="tag">Database</span>
+    
+    <span class="tag">blog</span>
+    
+  </div>
+
+
+
+
+
+<h2 id="목적">목적</h2>
+
+<hr />
+
+<p>기존의 데이터베이스로 관리하던 대기열 시스템을 Redis를 이용하여 데이터베이스의 부하를 줄인다.</p>
+
+<p><br /></p>
+
+<h2 id="대기열-개발방식-고찰">대기열 개발방식 고찰</h2>
+
+<hr />
+
+<h3 id="은행창구-방식">은행창구 방식</h3>
+<ul>
+  <li>만료된 대기열의 큐만큼 서비스를 이용할 수 있는 토큰을 활성화</li>
+  <li>현재 대기열은 데이터베이스를 이용하여 은행 창구 방식으로 관리된다.</li>
+  <li>대기열 시스템을 요약하자면 아래와 같다.
+    <ol>
+      <li>콘서트 스케줄 날짜 조회를 시도하는 사용자에게 토큰을 발급하고 데이터베이스에 저장한다. 토큰의 상태값은 <code class="language-plaintext highlighter-rouge">WAIT</code>이다.</li>
+      <li>만료된 토큰을 기준으로 스케줄러를 이용하여 일정시간마다 <code class="language-plaintext highlighter-rouge">WAIT</code>의 토큰을 <code class="language-plaintext highlighter-rouge">ACTIVE</code>로 변경한다. (만료시간은 5분 - 평균 유저활동 시간)</li>
+      <li>5분 내에 콘서트 예약이 이루어지지 않는다면 스케줄러를 이용하여 <code class="language-plaintext highlighter-rouge">ACTIVE</code>에서 <code class="language-plaintext highlighter-rouge">EXPIRE</code>로 변경한다.</li>
+      <li>예약이 완료된다면 <code class="language-plaintext highlighter-rouge">ACTIVE</code>에서 <code class="language-plaintext highlighter-rouge">EXPIRE</code>로 변경한다.</li>
+    </ol>
+  </li>
+  <li>장점
+    <ul>
+      <li>서비스를 이용하는 유저를 일정한 수 만큼 유지할 수 있다.</li>
+    </ul>
+  </li>
+  <li>단점
+    <ul>
+      <li>유저의 행동에 따라 대기열의 전환시간이 불규칙하다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="놀이공원-방식">놀이공원 방식</h3>
+<ul>
+  <li>N초마다 M개의 Active token으로 전환한다.</li>
+  <li>Redis를 이용하여 개선될 방식이다.</li>
+  <li>장점
+    <ul>
+      <li>대기열의 사용자들이 일정한 시간으로 서비스의 진입이 가능하다.</li>
+    </ul>
+  </li>
+  <li>단점
+    <ul>
+      <li>서비스를 이용하는 사용자의 수가 보장되지 않는다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="대기열-기능개발">대기열 기능개발</h2>
+<hr />
+
+<ul>
+  <li>RDB에서 관리하던 기존 대기열을 아래의 Redis 자료구조를 이용하여 처리함
+    <ul>
+      <li>기존
+        <ul>
+          <li>데이터베이스를 이용한 대기열 관리</li>
+        </ul>
+      </li>
+      <li>신규
+        <ul>
+          <li>2가지 Redis 자료구조를 이용하여 대기열을 구성함</li>
+          <li>대기큐(WaitingQueue) : Sorted Set 자료구조를 이용</li>
+          <li>활성큐(ActiveQueue) : Set 자료구조 이용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>큐의 만료시간 설정
+    <ul>
+      <li>기존 : 스케줄러를 이용하여 5분경과된 데이터의 상태값 변경</li>
+      <li>신규 : 활성큐의 Key에 TTL을 적용하여 만료시간을 조절</li>
+    </ul>
+  </li>
+  <li>만료시간 연장
+    <ul>
+      <li>기존 : 토큰을 이용하여 해당 큐를 조회하여 만료시간을 연장함</li>
+      <li>신규 : 토큰을 이용하여 해당 큐의 TTL을 갱신</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="코드">코드</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">QueueRedisService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">UserAccountRepository</span> <span class="n">userAccountRepository</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">WaitingQueueRedisRepository</span> <span class="n">waitingQueueRedisRepository</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ActiveQueueRedisRepository</span> <span class="n">activeQueueRedisRepository</span><span class="o">;</span>
+
+    <span class="cm">/**
+        대기큐 생성
+    */</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">createWaitQueue</span><span class="o">(</span><span class="nc">Long</span> <span class="n">userId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">lockKey</span> <span class="o">=</span> <span class="s">"lock:user:"</span> <span class="o">+</span> <span class="n">userId</span><span class="o">;</span>
+        <span class="c1">// 10초동안 같은 유저가 큐에 진입하지 못하도록 함</span>
+        <span class="nc">Boolean</span> <span class="n">isUserQueued</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">setIfAbsent</span><span class="o">(</span><span class="n">lockKey</span><span class="o">,</span> <span class="s">"LOCK:%d"</span><span class="o">.</span><span class="na">formatted</span><span class="o">(</span><span class="n">userId</span><span class="o">),</span> <span class="mi">10</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="nc">Boolean</span><span class="o">.</span><span class="na">FALSE</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">isUserQueued</span><span class="o">))</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">lockKey</span><span class="o">);</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"user already in the wait Queue : userId - {}, lockValue - {}"</span><span class="o">,</span> <span class="n">userId</span><span class="o">,</span> <span class="n">s</span><span class="o">);</span>
+            <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">UserAccount</span> <span class="n">userAccount</span> <span class="o">=</span> <span class="n">userAccountRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">userId</span><span class="o">);</span>
+            <span class="nc">String</span> <span class="n">token</span> <span class="o">=</span> <span class="n">generateToken</span><span class="o">();</span>
+            <span class="c1">// 생성된 토큰을 사용자 정보에 저장</span>
+            <span class="n">userAccount</span><span class="o">.</span><span class="na">saveToken</span><span class="o">(</span><span class="n">token</span><span class="o">);</span>
+            <span class="n">userAccountRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">userAccount</span><span class="o">);</span>
+            <span class="c1">// 대기열에 사용자의 정보와 토큰을 저장</span>
+            <span class="n">waitingQueueRedisRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">userAccount</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="n">token</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">token</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">redisTemplate</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">lockKey</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+        활성큐('Active Queue')를 생성한다.
+            - 놀이공원 방식의 `대기열`을 구성
+            - 파라미터(limit)만큼의 큐를 `대기큐`에서 `활성큐`로 변경
+            - 스케줄러를 사용하여 변경함
+    */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createActiveQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">WaitingQueueRedisDto</span><span class="o">&gt;</span> <span class="n">waitingQueues</span> <span class="o">=</span> <span class="n">waitingQueueRedisRepository</span><span class="o">.</span><span class="na">getQueueByRange</span><span class="o">(</span><span class="n">limit</span><span class="o">);</span>
+        <span class="n">waitingQueues</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">dto</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">activeQueueRedisRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">dto</span><span class="o">.</span><span class="na">getToken</span><span class="o">(),</span> <span class="n">dto</span><span class="o">.</span><span class="na">getUserId</span><span class="o">());</span>
+            <span class="n">waitingQueueRedisRepository</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">dto</span><span class="o">.</span><span class="na">getToken</span><span class="o">(),</span> <span class="n">dto</span><span class="o">.</span><span class="na">getUserId</span><span class="o">());</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+        활성큐의 만료시간을 연장한다.
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">extendExpiration</span><span class="o">(</span><span class="nc">String</span> <span class="n">token</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">activeQueueRedisRepository</span><span class="o">.</span><span class="na">extendExpiration</span><span class="o">(</span><span class="n">token</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+        대기큐의 순위를 리턴한다. - 사용자의 접속 순서를 확인할 수 있음
+     */</span>
+    <span class="kd">public</span> <span class="nc">Long</span> <span class="nf">getRank</span><span class="o">(</span><span class="nc">String</span> <span class="n">token</span><span class="o">,</span> <span class="nc">Long</span> <span class="n">userId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">waitingQueueRedisRepository</span><span class="o">.</span><span class="na">getRank</span><span class="o">(</span><span class="n">token</span><span class="o">,</span> <span class="n">userId</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+        활성큐를 검증한다.
+     */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verify</span><span class="o">(</span><span class="nc">String</span> <span class="n">token</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">activeQueueRedisRepository</span><span class="o">.</span><span class="na">verify</span><span class="o">(</span><span class="n">token</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+        파라미터 범위만큼 대기큐를 조회한다.
+     */</span>
+    <span class="kd">public</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">WaitingQueueRedisDto</span><span class="o">&gt;</span> <span class="nf">getWaitingQueues</span><span class="o">(</span><span class="kt">int</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">waitingQueueRedisRepository</span><span class="o">.</span><span class="na">getQueueByRange</span><span class="o">(</span><span class="n">limit</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="nf">generateToken</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">uuid</span> <span class="o">=</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">uuid</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">uuid</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s">"-"</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<hr />
+<h3 id="부하테스트">부하테스트</h3>
+
+<h4 id="목적-1">목적</h4>
+
+<p>부하테스트를 실시하여 대기열에서 처리열로 이동할 수 있는 토큰의 수량 및 시간을 특정할 수 있다.</p>
+
+<h4 id="테스트-환경">테스트 환경</h4>
+
+<ul>
+  <li>서버: 로컬 테스트
+    <ul>
+      <li>사양: Mac CPU(M3) , RAM(18G)</li>
+    </ul>
+  </li>
+  <li>데이터베이스 : MySql (Server version: <code class="language-plaintext highlighter-rouge">8.3.0</code> MySQL Community Server - GPL)</li>
+  <li>Redis: redis_version: <code class="language-plaintext highlighter-rouge">6.2.14</code></li>
+  <li>부하테스트 : <code class="language-plaintext highlighter-rouge">k6</code></li>
+</ul>
+
+<h4 id="테스트-시나리오-및-결과">테스트 시나리오 및 결과</h4>
+
+<blockquote>
+  <ol>
+    <li>30초 동안 점진적으로 사용자를 1명에서 1000명의 늘린다.</li>
+    <li>30초 동안 1000명의 사용자를 유지한다.</li>
+    <li>30초 동안 점진적으로 사용자를 1000명에서 1명으로 줄인다.</li>
+  </ol>
+</blockquote>
+
+<p><img src="/assets/images/database/queue_test.png" width="700" /></p>
+
+<p>테스트 결과</p>
+<ul>
+  <li>평균: 7.99ms</li>
+  <li>최대: 86.06ms</li>
+  <li>평균 TPS: 660/s</li>
+</ul>
+
+<p>1분간 유저가 호출하는 API</p>
+<ul>
+  <li>2(콘서트 좌석을 조회하는 API, 예약 API) * 1.5 ( 동시성 이슈에 의해 예약에 실패하는 케이스를 위한 재시도 계수(예측치)) = 3</li>
+</ul>
+
+<p>분당 처리할 수 있는 트랜잭션 수: 660/s * 60s = 39600</p>
+
+<p>분당 처리할 수 있는 동시 접속자 수: 39600 / 3(API 수) = 13200 명</p>
+
+<p>데스트 서버를 이용시 <code class="language-plaintext highlighter-rouge">1분당</code> 대략적으로 <code class="language-plaintext highlighter-rouge">13200명</code>을 동시 처리가능하므로 <code class="language-plaintext highlighter-rouge">10초</code>마다 <code class="language-plaintext highlighter-rouge">2200명</code>의 토큰을 대기큐에서 활성큐로 전환하여 수용할 수 있다는 추론할 수 있다.</p>
+
+
+
+<hr>
+
+<div id="disqus_thread"></div>
+
+
+  <div class="credits">&copy;&nbsp;2025&nbsp;Abhinav Saxena
+    &nbsp;
+    •
+    &nbsp;Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+    &nbsp;
+    •
+    &nbsp;Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+  </div>
+
+
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  
+  var disqus_config = function () {
+  this.page.url = 'https://futuremaker019.github.io/redis%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8C%80%EA%B8%B0%EC%97%B4-%EA%B5%AC%ED%98%84';  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/Redis를 이용한 대기열 구현'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  
+  (function () { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-futuremaker019-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+        </div>
+
+      
+
+    </main>
+
+     <!-- dark, light  -->
+    
+        <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+    <script async defer src="https://sdk.soopr.co/soopr.js"></script></body>
+</html>
