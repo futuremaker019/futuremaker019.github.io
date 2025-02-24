@@ -88,6 +88,7 @@ DEPENDENCIES
   base64
   bigdecimal
   csv
+  jekyll (~> 4.2)
   jekyll-toc
   moonwalk!
   webrick (~> 1.7)
