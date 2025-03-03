@@ -71,3 +71,9 @@ private static int recursive(int[] arr, int value, int left, int right) {
     }
 }
 ```
+
+---
+
+참고
+- 코딩 테스트 합격자 되기 - 서적
+- [자바로 배우는 자료구조](https://www.youtube.com/watch?v=waPwUJu0-lo&list=PLlTylS8uB2fCoXCVtfJ0wzotOU8a3ti6M)
